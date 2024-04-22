@@ -14,12 +14,26 @@ In addition to the schema, the components of the book are related via a **constr
 
 A book can have various **presentation formats** with the basic format being a LaTeX formatted document, but others are also possible. It is integrated with [Pandoc](https://pandoc.org/).
 
+## Actions
+
+The book evolves via a sequence of actions and these are recorded in an action-log. It is the writing team's choice when to carry out these actions. The Git repo maintains history of all of the actions. In fact every commit is associated with an action.
+
+Actions are always (certainly in this version) human instigated. The main thing that the writing team does is work on actions.
+
+## User Editing Actions
+
+These actions are actions of editing components (writing), revising the schema, revising the presentation formats, or revising the construction DAG. 
+
 ## Admin Actions
 
-The basic admin actions are to create the book via a presentation format. 
+The basic admin actions are to create the book via a presentation format. There are also other admin actions that summarize the progress etc...
 
-## Agent Actions
+## Proofread Actions
 
-The editing of the book involves human level writing/creation, with standard GitHub commits. But there are also agent actions that can be carried out for increating the maturity level of components and for enforcing consistency across the book. 
+These are actions where the book is annotated, proofread, and collets input.
+
+## Agent Actions (AI)
+
+This is where AI/LLMs/Agents are used to help improve the book. Agent actions invoke LLMs to imrpove text, implement proofread inputs, enforce consitnency along the construction DAG, and generally improve the maturity of components. 
 
 
