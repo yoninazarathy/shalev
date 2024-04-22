@@ -20,19 +20,19 @@ The book evolves via a sequence of actions and these are recorded in an action-l
 
 Actions are always (certainly in this version) human instigated. The main thing that the writing team does is work on actions.
 
-## User Editing Actions
+### User Editing Actions
 
 These actions are actions of editing components (writing), revising the schema, revising the presentation formats, or revising the construction DAG. 
 
-## Admin Actions
+### Admin Actions
 
 The basic admin actions are to create the book via a presentation format. There are also other admin actions that summarize the progress etc...
 
-## Proofread Actions
+### Proofread Actions
 
 These are actions where the book is annotated, proofread, and collets input.
 
-## Agent Actions (AI)
+### Agent Actions (AI)
 
 This is where AI/LLMs/Agents are used to help improve the book. Agent actions invoke LLMs to imrpove text, implement proofread inputs, enforce consitnency along the construction DAG, and generally improve the maturity of components. 
 
