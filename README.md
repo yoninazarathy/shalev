@@ -4,7 +4,22 @@ A framework for systematic book writing using LLMs.
 
 --- 
 
-Shalev is a framework for writing books with the help of LLM based agents. Agents help create content, and synchronize content among various parts of the book. 
+Shalev is a framework for writing books, large research papers, or book like websites with the help of LLM based agents. The general idea is that structure, ideas, and style are laid out by the **authors**, while agents help refine content and synchronize style and content among various parts of the book. It is particularly geared towards books of a _mathematical_ and _programming_ nature, but it is not limited to these types of books.
+
+The name is motivated by the late author, [Meir Shalev](https://en.wikipedia.org/wiki/Meir_Shalev) and the similar Hebrew word "shiluv" (שילוב) means "combination". Indeed as attributed by Meir Shalev he used to write his books based on various sub-components which he would later combine into a model. Similarly, in Shalev, the basic entity is a **component** which is combined into the final product. However, Meir Shalev did not have LLM help, which is the main strength of using Shalev for book writing.
+
+At the moment Shalev is a set of software tools combined with procedures for writing a book. It is used to create the following books: 
+
+* _Linear Algebra with Julia and JAX: Fundamentals for Data Science, Machine Learning
+and Artificial Intelligence.
+* _Statistics with Julia: Fundamentals for Data Science, Machine Learning and Artificial Intelligence._ 
+* _Statistics with Python: Fundamentals for Data Science, Machine Learning and Artificial Intelligence._
+* _The Tales of Curious Epsilon_
+* _The PhD Thesis of QQQQ_
+
+The need and opportunity for a tool like Shalev became apparent during the work on [_The Mathematical Engineering of Deep Learning](https://deeplearningmath.org/) especially since Chat-GPT became available during the final year of work on that book.
+
+## Main idea
 
 The created **book** evolves in a GitHub repository where the evolving files each represent a **component** of the book (section, example, figure, subsection, etc.... ). Components can be in various levels of **maturity**, where maturity is an positive integer numerical value. For example initially a component can just be a collection of textual notes indicating what it means to represent (maturity = 0). Then as it matures, among commits it becomes a more concrete book component. Each component has a unique text based id and UUID. A component has a **type** which is section, example, figure, subsection, etc.... Components are hiearchical, so sections are parts of chapters, subsections are parts of sections, etc.
 
