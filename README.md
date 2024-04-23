@@ -11,7 +11,7 @@ The name is motivated by the late author, [Meir Shalev](https://en.wikipedia.org
 At the moment Shalev is a set of software tools combined with procedures for writing a book. It is used to create the following books: 
 
 * _Linear Algebra with Julia and JAX: Fundamentals for Data Science, Machine Learning
-and Artificial Intelligence.
+and Artificial Intelligence_.
 * _Statistics with Julia: Fundamentals for Data Science, Machine Learning and Artificial Intelligence._ 
 * _Statistics with Python: Fundamentals for Data Science, Machine Learning and Artificial Intelligence._
 * _The Tales of Curious Epsilon_
