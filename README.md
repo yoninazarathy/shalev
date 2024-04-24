@@ -59,11 +59,27 @@ Note that while some actions come with the Shalev CLI, most actions are project 
 
 ## Actions of the SAF
 
-SAF actions are what makes Shalev useful and effective. These actions apply LLM-Agents on components to iterate them and improve them. At the moment an action always modifies a single component, where sometimes the `body.txt` file is modified and sometimes the `metadata.json` file is modified, and sometimes both. 
+SAF actions are what makes Shalev useful and effective. These actions apply LLM-Agents on components to iterate them and improve them. Many mundane editing tasks are automated via SAF actions. An action modifies a single component, where sometimes the `body.txt` file is modified and sometimes the `metadata.json` file is modified, and sometimes both. But actions can be `-r` (recursive) in which case sub components are modified as well.
 
 SAF actions are stored in the `actions/SAF` folder. Here are a few actions, **general_proofread**, **transform_code**, **apply_comments**, and a few more. 
 
 The specification of these actions and how they related different components is the core part of Shalev and is still being developed. In a nutshell, Shalev runs an LLM to use these actions.
+
+For example,
+
+```
+shalev general_proofread root -r
+```
+
+applies a general proofread to the root component with proofreading applied to all sub components (the whole project) recursively. Proof reading content is then recorded in the metadata file of each component. 
+
+Or,
+
+```
+shalev transform_julia_to_python example_normal_dist_julia example_normal_dist_python
+```
+
+applies a specific action called `transform_julia_to_python` which translates Julia code to Python code. It takes the component `example_normal_dist_julia` as input and the component `example_normal_dist_python` as an output component.
 
 ## The Shalev Config
 
