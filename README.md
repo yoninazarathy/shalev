@@ -20,13 +20,14 @@ Also note that some SAF actions do not change the actual body of a component but
 
 ## Motivation
 
-At the moment, Shalev is being developed to aid the creation of the following books: 
+At the moment, Shalev is being developed to aid the creation of the following books (or some subset): 
 
 * _Linear Algebra with Julia and JAX: Fundamentals for Data Science, Machine Learning and Artificial Intelligence_: This book will be based on short Julia and JAX (Python) code examples. Linear algebra concepts will be augmented with both Julia and JAX examples. Among other tasks, Shalev will be used to ensure consistency among examples and across the two languages (Julia and JAX/Python).
 * _Statistics with Julia: Fundamentals for Data Science, Machine Learning and Artificial Intelligence, Second Edition._ The [first edition](https://statisticswithjulia.org/) will be revised with agent framework actions.
 * _Statistics with Python: Fundamentals for Data Science, Machine Learning and Artificial Intelligence._ This is a port of Statistics with Julia, adapted to Python. Shalev will be used for the port. 
 * _The Tales of Curious Epsilon_. This book is an exploratory mathematics book based on old existing blog posts. The writing style is very different to the other books. 
 * _Structured Markov Chains and Linear Control Theory_. An early [rough version](https://people.smp.uq.edu.au/YoniNazarathy/AMSIschool2016/bookSS16_WHOLE_BOOK_v2.pdf) of this book exists and Shalev will be used to as an aid to complete it.
+* _Twenty Methods in Data Science and the Mathematics Behind Them_. This book does not exist but was conceptualized a few years ago. It is a book the presents an exposition of why maths is useful for data science.
 * _The Mathematical Engineering of Deep Learning, Second edition_. The [first edition](https://deeplearningmath.org/) exists but deep learning is moving very fast and there is room to update to a second edition, also with the help of Shalev.
 
 The need and opportunity for a tool like Shalev became apparent during work on [_The Mathematical Engineering of Deep Learning_](https://deeplearningmath.org/) especially since Chat-GPT became available during the final year of work on that book. Yet for that book, using Chat-GPT for anything beyond table and formula formatting was not really possible as the style and messaging of the book needed to be kept and any Chat-GPT text generated was not really useful. Still, working on a deep learning book during the Chat-GPT era made it clear that many editing tasks can be automated in ways where the authors have (almost) full control of the final product, and where LLMs save an immense amount of time. Note that many of these tasks are not directly related to English language or creative writing, but are rather related to tasks of enforcing style and consistency along the book among others.
