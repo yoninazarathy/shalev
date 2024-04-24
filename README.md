@@ -49,7 +49,13 @@ where `foo` is a different component name. Note also that one component is calle
 
 All components are included via a tree structure from `root`, and (typically) every component is included only once.  
 
-This structure then allows the main action of the SCF, **compileproject** to execute. The basics of this action is to construct all of the components into one source file, e.g. a valid complete LaTeX file, and then produce output via LaTeX compilation. 
+This structure then allows the main action of the SCF, **compileproject** to execute. The basics of this action is to construct all of the components into one source file, e.g. a valid complete LaTeX file, and then produce output via LaTeX compilation. Via the CLI this is just executed as,
+
+```
+shalev compileproject
+```
+
+Note that while some actions come with the Shalev CLI, most actions are project specific. Python code for all actions is stored in the `actions` folder which has the `SCF` and `SAF` subfolders. So for example for `compileproject`, there is the `compileproject.py` file inside `actions/SCF` and this script would first use another action which comes with the Shalev Python package, `composeproject`, and then execute LaTeX (pandoc or similar) on the intermediate composed project (where all sub components were included). Note that there is also a `tmp` folder where intermediate files are stored.
 
 ## Actions of the SAF
 
