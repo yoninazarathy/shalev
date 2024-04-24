@@ -2,15 +2,23 @@
 
 (UNDER DEVELOPMENT)
 
-A framework for systematic book writing using LLMs .
+A framework for systematic book writing with the help of LLM Agents.
 
 --- 
 
-Shalev is a framework for writing books, large research papers, theses, or book like websites with the help of LLM based agents. The general idea is that structure, ideas, and style are laid out by the **authors**, while agents help refine content and synchronize style and content among various parts of the book. It is particularly geared towards books of a _scientific_, _mathematical_, or _programming_ nature, but it is not limited to these types of books.
+Shalev is a framework for writing books, large research papers, theses, or book like websites with the help of LLM based agents. The general idea is that structure, ideas, and style are laid out by the **authors**, while agents help refine content and synchronize style and content among various parts of the book. Shalev is particularly geared towards books of a _scientific_, _mathematical_, or _programming_ nature, but it is not limited to these types of books.
 
 The name is motivated by the late author, [Meir Shalev](https://en.wikipedia.org/wiki/Meir_Shalev) as well as the similar Hebrew word "shiluv" (שילוב) which means "combination". Indeed as attested by Meir Shalev, he used to write his books based on various sub-components which he would later combine into a cohesive story. Similarly, in Shalev, the basic entity is a **component** which is combined into the final product. Importantly, in Shalev, the components are manipulated and refined with the help of LLM along the way. 
 
-At the moment Shalev is a set of software tools combined with procedures for writing a book. It may be set as a visual studio code (or other IDE) plug-in, but it is still not. At the moment, Shalev is being developed to aid the creation of the following books: 
+At the moment Shalev, under development, is a CLI tool and a conceptual framework for book editing. In the future Shalev may be a visual studio code (or other IDE) plug-in, but there are no plans for this yet. In any case, the Shalev framework heavily relies on git workflows, as any changes to a component are committed, together with metadata.
+
+Shalev has two main components, **Shalev agent framework** and **Shalev aggregator**. The agent framework is the part associated with carrying out LLM/AI agent based tasks on components. The aggregator is simply the tool that aggregates all the components into a document that is compiled via LaTeX, pandoc, or other means. A Shalev **project** (book) has metadata associated both with the agent framework and aggregator, and this metadata, also edited during the book writing processes, specifies for the agent framework and the aggregator how to carry out various **actions**. 
+
+In general **agent framework actions** are LLM generative tasks that transform components, followed by git commits of the changes. Similarly **aggregator actions** are operations of combining the latest versions of the components into a book preview as well as potentially other summaries. Note that some agent framework actions are also based on **Shalev project feedback** which are input feedback to draft of the book requiring action (e.g. proofreading annotations). Note that some project feedback is also automatically generated via actions, e.g. automatic checking of consistency, comparison of example code (in case the book has computer programming code) output, and similar checks.
+
+## Motivation
+
+At the moment, Shalev is being developed to aid the creation of the following books: 
 
 * _Linear Algebra with Julia and JAX: Fundamentals for Data Science, Machine Learning
 and Artificial Intelligence_.
@@ -24,8 +32,6 @@ The need and opportunity for a tool like Shalev became apparent during work on [
 Shalev is also related to the world of automatic software creation (e.g. GitHub co-pilot). A general paradigm that it attempts to employ is [flow engineering](https://arxiv.org/abs/2401.08500).
 
 We note that Shalev can help with creation of freeform text, mathematical formulas, bibliography, computer programming code (appearing in book), [TikZ](https://texample.net/tikz/examples/) illustrations and other elements appearing the book.
-
-Shalev is closely tied to GitHub, Pandoc, and LaTeX.
 
 ## Main idea
 
