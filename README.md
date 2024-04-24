@@ -35,7 +35,7 @@ Shalev is also related to the world of automatic software creation (e.g. GitHub 
 
 We note that Shalev can help with creation and editing of freeform text, mathematical formulas, bibliography, computer programming code (appearing in book), [TikZ](https://texample.net/tikz/examples/) illustrations and other elements appearing the book.
 
-## Components
+## Components and the basic action of SCF
 
 The atoms of a Shalev project are called **components** where you can think of a component as a part of the book. Each component has a **component type** where component types can be _chapter_, _section_, _subsection_, _code-snippet_, etc. Shalev comes with basic component types motivated by the example projects it was developed for. New component types can be defined as well. Depending on the component type, some components can have children (e.g. a _chapter_ can have _sections_ as children). These component types are **non-leaf** components. Other  component types are **leafs** (e.g. a _code-snippet_). There is also the **root** component which is the whole project and it includes all other components.
 
@@ -51,7 +51,9 @@ All components are included via a tree structure from `root`, and (typically) ev
 
 This structure then allows the main action of the SCF, **compileproject** to execute. The basics of this action is to construct all of the components into one source file, e.g. a valid complete LaTeX file, and then produce output via LaTeX compilation. 
 
-QQQQQQ
+## Actions of the SAF
+
+
 
 In greatest simplicity a component type is made of a text file (also perhaps LaTeX or Markdown), where if it is **non-leaf** there are also special commands to include components in it. Note that non-leaf components can still include text on their own right just like the fact that a section can have text followed by sub-sections, etc... 
 
