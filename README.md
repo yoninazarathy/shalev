@@ -4,7 +4,7 @@
 
 A framework for systematic book writing with the help of LLM Agents.
 
---- 
+[A mechanical arm](img/shalev_illustration.png)
 
 Shalev is a framework for writing books, large research papers, theses, or book like websites with the help of LLM based agents. The general idea is that structure, ideas, and style are laid out by the **authors**, while agents help refine content and synchronize style and content among various parts of the book. Shalev is particularly geared towards books of a _scientific_, _mathematical_, or _programming_ nature, but it is not limited to these types of books.
 
