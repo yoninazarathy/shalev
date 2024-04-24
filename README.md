@@ -81,6 +81,8 @@ shalev transform_julia_to_python example_normal_dist_julia example_normal_dist_p
 
 applies a specific action called `transform_julia_to_python` which translates Julia code to Python code. It takes the component `example_normal_dist_julia` as input and the component `example_normal_dist_python` as an output component.
 
+There are many more useful actions, some of which come with Shalev and others can be customized in the project.
+
 ## The Shalev Config
 
 A Shalev project has the `config` folder which has files that specify certain settings such the LLM to use a (.gitignored) file that has API keys, and other content.
