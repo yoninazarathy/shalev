@@ -63,4 +63,8 @@ SAF actions are what makes Shalev useful and effective. These actions apply LLM-
 
 SAF actions are stored in the `actions/SAF` folder. Here are a few actions, **general_proofread**, **transform_code**, **apply_comments**, and a few more. 
 
-The specification of these actions and how they related different components is the core part of Shalev and is still being developed.
+The specification of these actions and how they related different components is the core part of Shalev and is still being developed. In a nutshell, Shalev runs an LLM to use these actions.
+
+## The Shalev Config
+
+A Shalev project has the `config` folder which has files that specify certain settings such the LLM to use a (.gitignored) file that has API keys, and other content.
