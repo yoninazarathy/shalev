@@ -87,3 +87,11 @@ There are many more useful actions, some of which come with Shalev and others ca
 ## The Shalev Config
 
 A Shalev project has the `config` folder which has files that specify certain settings such the LLM to use a (.gitignored) file that has API keys, and other content.
+
+## Installation
+
+Currently execution is via a bash script (tested on Mac).
+
+1. Clone the repo.
+1. `chmod +x shalev`
+1. `export PATH="$(pwd):$PATH"`
