@@ -1,4 +1,11 @@
 import click
+import sys
+import os
+
+actions_path = os.path.join(os.getcwd(), "actions")
+sys.path.append(actions_path)
+
+from compile import *
 
 @click.group()
 def cli():
@@ -20,10 +27,16 @@ def status():
 def config():
     print("config")
 
+@click.command()
+def compile():
+    compile_action()
+
+
 cli.add_command(agent)
 cli.add_command(composer)
 cli.add_command(status)
 cli.add_command(config)
+cli.add_command(compile)
 
 if __name__ == '__main__':
     cli()

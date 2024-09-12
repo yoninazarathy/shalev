@@ -1,0 +1,115 @@
+\relax 
+\citation{lecun2015deep}
+\citation{howard2020deep}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\citation{prince2023understanding}
+\citation{goodfellow2016deep}
+\providecommand \oddpage@label [2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Some Motivating Deep Learning Models}{3}{}\protected@file@percent }
+\newlabel{sec:motivating-deep-learning-models}{{2}{3}}
+\newlabel{eq:first-shallow-view}{{1}{4}}
+\newlabel{eq:smallz-only-log-mult}{{2}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The sigmoid model represented with neural network terminology as a shallow neural network. Observe that the artificial neuron is composed of an affine transformation using $z = b_0 + w^\top x$ followed by a non-linear activation transformation $\sigma _{\text  {Sig}}(z)$.\relax }}{4}{}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:niceneuron}{{1}{4}}
+\newlabel{eq:y-hat-tau}{{3}{5}}
+\newlabel{eq:softeq}{{4}{5}}
+\newlabel{eq:small-zk-log-mult}{{5}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The softmax model as a shallow neural network model with output $\hat  {y}$ which is composed of elements $\hat  {y}_1, \ldots  , \hat  {y}_K$, representing a probability vector. \relax }}{6}{}\protected@file@percent }
+\newlabel{fig:shalsoft}{{2}{6}}
+\newlabel{eq:argmax-mp}{{6}{6}}
+\newlabel{eq:generalRecursiveModel}{{7}{7}}
+\newlabel{eq:dense-layer}{{8}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Data Standardization and Recalling Summation Notation}{7}{}\protected@file@percent }
+\newlabel{sec:summation}{{3}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A fully connected feedforward deep neural network with multiple hidden layers. The input to the network is the vector $x = (x_1, x_2, x_3, x_4)$ and in this case the output is the scalar\nobreakspace  {}$\hat  {y}$. For this particular example the dimensions of $W^{[1]}$ are $4\times 4$, $W^{[2]}$ is $3 \times 4$, $W^{[3]}$ is $5 \times 3$, and $W^{[4]}$ is $1 \times 5$. The bias vectors are of dimension $4$ for $b^{[1]}$, $3$ for $b^{[2]}$, $5$ for $b^{[3]}$, and $1$ (a scalar) for $b^{[4]}$. \relax }}{8}{}\protected@file@percent }
+\newlabel{FFNN}{{3}{8}}
+\newlabel{eq:data-table}{{9}{8}}
+\newlabel{eq:stats-mean-var}{{10}{9}}
+\newlabel{eq:4-summation}{{11}{9}}
+\newlabel{eq:4-summation-advc}{{12}{9}}
+\newlabel{eq:ref-stand-z}{{13}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}From Basic Sets to Functions}{10}{}\protected@file@percent }
+\newlabel{sec:sets-and-functions}{{4}{10}}
+\newlabel{eq:some-func}{{16}{11}}
+\newlabel{eq:arb-func-r-to-r}{{17}{11}}
+\newlabel{eq:sig-as-func}{{18}{11}}
+\newlabel{eq:softmax-as-func}{{19}{11}}
+\newlabel{eq:model-I-f}{{20}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Probability output using Model I. (a) A $p=1$ model with one feature. (b) A $p=2$ model based on two features. \relax }}{12}{}\protected@file@percent }
+\newlabel{fig:breast-log-curves}{{4}{12}}
+\newlabel{eq:model-II-f}{{21}{12}}
+\newlabel{eq:model-III-f}{{22}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces An example plot of an hypothetical loss function (also known as loss landscape) when there are two parameters. (a) A 3D surface plot where we see that the function has multiple valleys (local minima). (b) The same function can be plotted using a contour plot, where each line along a contour maintains the same value of the loss function (like a topographical map).\relax }}{13}{}\protected@file@percent }
+\newlabel{fig:GD-LR-SR}{{5}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Vectors}{14}{}\protected@file@percent }
+\newlabel{sec:vectors}{{5}{14}}
+\newlabel{eq:example-y-hat}{{24}{14}}
+\citation{boyd2018introduction}
+\newlabel{eq:inner product}{{25}{15}}
+\newlabel{eq:norm-vec}{{26}{15}}
+\newlabel{eq:cosine-angle-vec}{{27}{15}}
+\newlabel{eq:euc-distance}{{28}{16}}
+\newlabel{eq:euc-mse-l2}{{29}{16}}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\citation{boyd2018introduction}
+\newlabel{eq:mse-error-class-1000}{{30}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Matrices}{17}{}\protected@file@percent }
+\newlabel{sec:matrices}{{6}{17}}
+\newlabel{eq:matrix-example-1}{{31}{17}}
+\citation{nazarathy2020statistics}
+\newlabel{eq:identity}{{32}{18}}
+\newlabel{eq:vec-as-matrix}{{33}{18}}
+\newlabel{eq:matrix-example-1-t}{{34}{18}}
+\newlabel{eq:matrix-a-b-for-mult}{{35}{19}}
+\newlabel{eq:matrix-example}{{36}{19}}
+\newlabel{eq:matrix-example-2}{{37}{19}}
+\citation{boyd2018introduction}
+\citation{strang2019linear}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\newlabel{eq:matrix-vector-mult}{{38}{20}}
+\newlabel{eq:model-ii-vector-add}{{39}{20}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Further Notes About Vectors and Matrices}{20}{}\protected@file@percent }
+\newlabel{sec:further-notes}{{7}{20}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Gradients}{21}{}\protected@file@percent }
+\newlabel{sec:gradient}{{8}{21}}
+\citation{wilkes2016burn}
+\newlabel{eq:grad-def}{{40}{22}}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\citation{kingma2014adam}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\newlabel{eq:gdls1}{{41}{23}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {}{\ignorespaces Gradient descent with loss $C(\theta )$\relax }}{23}{}\protected@file@percent }
+\newlabel{alg:basic-gradient-descent}{{}{23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Illustration of gradient descent for 5 iterations starting with $\theta ^{(0)}$ and getting near the optimum $\theta ^*$ with $\theta ^{(5)}$. (a)\nobreakspace  {}A one-dimensional loss landscape $C(\theta )$ with $\theta \in \mathbb  {R}$. (b)\nobreakspace  {}a two-dimensional loss landscape $C(\theta _1,\theta _2)$ with $\theta = (\theta _1, \theta _2) \in \mathbb  {R}^2$.\relax }}{24}{}\protected@file@percent }
+\newlabel{simpleloss}{{6}{24}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Putting Bits Together Into a Deep Neural Network}{24}{}\protected@file@percent }
+\newlabel{sec:putting-bits-together}{{9}{24}}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\newlabel{eq:mod3-approx}{{42}{25}}
+\newlabel{eq:s-deep-step}{{43}{25}}
+\newlabel{eq:nn-example-dims}{{44}{25}}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\newlabel{eqn:opened-out-example-2}{{45}{26}}
+\newlabel{eq:61-is-the-number}{{46}{26}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}More Advanced Models}{26}{}\protected@file@percent }
+\newlabel{sec:more-advanced-models}{{10}{26}}
+\newlabel{eq:conv-kernel}{{47}{26}}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\citation{krizhevsky2012imagenetxxxqqq}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\newlabel{eq:conv-explicit}{{48}{27}}
+\newlabel{eq:very-spcific-conv}{{49}{27}}
+\citation{vaswani2017attention}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\newlabel{eq:score}{{50}{28}}
+\newlabel{eq:attentionweight}{{51}{28}}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\citation{LiquetMokaNazarathy2024DeepLearning}
+\bibstyle{apalike}
+\bibdata{BibForTheDLBook.bib}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion and Outlook}{29}{}\protected@file@percent }
+\newlabel{sec:conclusion}{{11}{29}}
+\gdef \@abspage@last{29}
