@@ -17,7 +17,13 @@ def compile_action(project_path='example_project'):
                             f'-output-directory={project_path}',
                             f'{project_path}/composed_project.tex'], capture_output=True, text=True)
 
-    print(result.stdout)
+    if result.returncode == 0:
+        print("LaTeX compilation successful!")
+        print(f"Output document should be in {project_path}/composed_project.pdf")
+    else:
+        print("LaTeX compilation failed!")
+        print("Error output:")
+        print(result.stdout)
 
 def process_file(file_path, processed_files=None):
     # Initialize the set to track already processed files (to avoid circular includes)
