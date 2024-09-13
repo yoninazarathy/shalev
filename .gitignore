@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 myenv/
+
+example_project/composed_project.*
