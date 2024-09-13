@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[margin=0.9in,footskip=0.25in]{geometry}
-\usepackage{graphicx} % Required for inserting images
+\usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -8,33 +8,21 @@
 \usepackage{blindtext}
 \usepackage{soul}
 \usepackage{wasysym}
-%\usepackage{subfigure}
 \usepackage{subcaption}
-%\usepackage[linesnumbered,boxed]{algorithm2e}
 \usepackage[linesnumbered, ruled, vlined]{algorithm2e}
-\SetKwInput{KwInput}{Input}                % Set the Input
+\SetKwInput{KwInput}{Input}
 \SetKwInput{KwOutput}{Output}  
 \usepackage{float}
-%\usepackage[format=plain, labelfont=bf, font=small]{caption}
 \usepackage[labelfont=bf, font=small]{caption}
 \DeclareCaptionLabelFormat{algnonumber}{Algorithm}
 \usepackage{authblk}
-%\captionsetup[algorithm]{labelformat=algnonumber}
-%\captionsetup[subfigure]{labelformat=simple,labelsep=colon}
 \captionsetup[figure]{labelformat=simple,labelsep=colon}
-%\captionsetup[table]{labelformat=simple,labelsep=colon}
-
-
 \usepackage{tikz-cd}
 
 \title{
 Navigating Mathematical Basics: \\
 A Primer for Deep Learning in Science
 }
-% \title{Overcoming Mathematical Fears\\
-% for Understanding Deep Learning:\\ 
-% A Primer for Scientists}
-%\author{Benoit Liquet, Sarat Moka, and Yoni Nazarathy}
 \date{\today}
 
 \author[1,2]{Benoit Liquet}
@@ -46,50 +34,21 @@ A Primer for Deep Learning in Science
 \affil[4]{\small School of Mathematics and Physics, The University of Queensland, Australia.}
 \affil[5]{\small Accumulation Point Pty Ltd, Australia.}
 
-
-
-
-
-%%%%%%%%%%%%%
-% Begin Sarat's definitions
-%%%%%%%%%%%%%%%
 \def\boxit#1{\vbox{\hrule\hbox{\vrule\kern6pt
           \vbox{\kern6pt#1\kern6pt}\kern6pt\vrule}\hrule}}
 \def\sbmcomment#1{\vskip 2mm\boxit{\vskip -2mm{\color{cyan}\bf#1} {\color{cyan}\bf -- SBM\vskip 2mm}}\vskip 2mm}
 \newcommand{\sbmc}[1]{{\color{cyan}#1}}
-%%%%%%%%%%%%%
-% End Sarat's definitions
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%
-% Begin Benoit's definitions
-%%%%%%%%%%%%%%%
 \def\boxit#1{\vbox{\hrule\hbox{\vrule\kern6pt
           \vbox{\kern6pt#1\kern6pt}\kern6pt\vrule}\hrule}}
 \def\blcomment#1{\vskip 2mm\boxit{\vskip -2mm{\color{green}\bf#1} {\color{green}\bf -- BL\vskip 2mm}}\vskip 2mm}
 \newcommand{\blc}[1]{{\color{green}#1}}
-%%%%%%%%%%%%%
-% End Sarat's definitions
-%%%%%%%%%%%%%%%
-
-
 
 \begin{document}
-
-
-
 \maketitle
-
 \begin{abstract}
-We present a gentle introduction to elementary mathematical notation with the focus of communicating deep learning principles. This is a ``math crash course'' aimed at quickly enabling scientists with understanding of  the building blocks used in many equations, formulas, and algorithms that describe deep learning. While this short presentation cannot replace solid mathematical knowledge that needs multiple courses and years to solidify, our aim is to allow non-mathematical readers to overcome hurdles of reading texts that also use such mathematical notation. We describe a few basic deep learning models using mathematical notation before we unpack the meaning of the notation. In particular, this text includes an informal introduction to summations, sets, functions, vectors, matrices, gradients, and a few more objects that are often used to describe deep learning. While this is a mathematical crash course, our presentation is kept in the context of deep learning and machine learning models including the sigmoid model, the softmax model, and fully connected feedforward deep neural networks. We also hint at basic mathematical objects appearing in neural networks for images and text data.
+xxWe present a gentle introduction to elementary mathematical notation with the focus of communicating deep learning principles. This is a ``math crash course'' aimed at quickly enabling scientists with understanding of  the building blocks used in many equations, formulas, and algorithms that describe deep learning. While this short presentation cannot replace solid mathematical knowledge that needs multiple courses and years to solidify, our aim is to allow non-mathematical readers to overcome hurdles of reading texts that also use such mathematical notation. We describe a few basic deep learning models using mathematical notation before we unpack the meaning of the notation. In particular, this text includes an informal introduction to summations, sets, functions, vectors, matrices, gradients, and a few more objects that are often used to describe deep learning. While this is a mathematical crash course, our presentation is kept in the context of deep learning and machine learning models including the sigmoid model, the softmax model, and fully connected feedforward deep neural networks. We also hint at basic mathematical objects appearing in neural networks for images and text data.
 \end{abstract}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-
 By now, deep learning has become an indispensable tool in science, permeating fields such as astronomy, genomics, climate science, robotics, materials science, and medical science. Its transformative impact extends beyond traditional boundaries, finding applications not only in theoretical domains but also in practical, real-world scenarios such as deciphering the intricacies of the human genome, predicting climate patterns, and enhancing surgical precision in neurosurgery. Deep learning serves as the linchpin for advancements in data analysis, image recognition, natural language processing, and decision-making systems, catalyzing breakthroughs that were once deemed unattainable. The past two decades have seen great advances in deep learning. See \cite{lecun2015deep} for a brief overview.
 
 There are multiple ways in which one can try and understand the workings of deep learning. One popular way to describe deep learning is via a hands-on programming approach as in \cite{howard2020deep}. This is good for someone directly implementing deep learning with a specific programming language such as Python. However, if one only seeks to understand what is going on in the realm of deep learning, the use of programming can be too specific and time consuming. Hence, a more reasonable approach is to understand underlying basic ideas, often using mathematical notation. This is the approach that we adopted in our recent book, {\em Mathematical Engineering of Deep Learning}, \cite{LiquetMokaNazarathy2024DeepLearning}. Other similar texts that also require mathematical notation include {\em Understanding Deep Learning
@@ -109,14 +68,8 @@ Similarly, in multi-class classification, the model, still operating on such an 
 
 The remainder of this document is structured as follows. In Section~\ref{sec:motivating-deep-learning-models} we see a mathematical description of models I, II, and III. Our aim with the early introduction of the models is to motivate the mathematical sections that follow where we unpack the notation presented for these models. Hence a reader reading Section~\ref{sec:motivating-deep-learning-models} should not be intimidated by the notation, but rather try to embrace it as it is unpacked and described in the sections that follow. In Section~\ref{sec:summation} we review summation notation through the application of data standardization (mean and variance computation). Most scientists would have seen and used such summation notation before, hence this section is mostly a review.  In Section~\ref{sec:sets-and-functions} we present an elementary view of sets, and functions. This is in no way an exhaustive description of set theory, but rather aims to place the reader in the mindset of set notation, and especially the ``in'' symbol, $\in$, that is often used, as well as the notation ${\mathbb R}$ for the set of real numbers and the declaration of functions using the arrow, $\to$, from the input set to the output set. In Section~\ref{sec:vectors} we outline the notion of vectors, which in greatest simplicity can be viewed as lists of numbers. Ideas such as inner products and norms are also introduced. In Section~\ref{sec:matrices} we discuss matrices and in particular matrix-vector multiplication. This operation is central in deep learning. We then comment on additional aspects of vectors and matrices in Section~\ref{sec:further-notes}. In Section~\ref{sec:gradient} we overview the concept of gradients, as these are the objects used when training deep learning models. We also see a basic version of the gradient descent algorithm. Then in Section~\ref{sec:putting-bits-together} we put a few of the mathematical pieces together, shining more light on fully connected feedforward deep neural networks. In Section~\ref{sec:more-advanced-models} we briefly discuss mathematical ideas used in a few extension models, including convolutional neural networks, recurrent neural networks, and the attention mechanism which is used in many contemporary large language models. We finally conclude in Section~\ref{sec:conclusion}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Some Motivating Deep Learning Models}
 \label{sec:motivating-deep-learning-models}
-
 Let us now use mathematical notation and some key equations to present what are perhaps the three most popular elementary machine learning and deep learning models. Note that as is common in mathematical texts, formulas and equations are numbered as (1), (2), etc. and are referenced as such. Models I and II are shallow neural networks and are considered as basic machine learning (and statistical) models. Model~III generalizes these models to a deep neural network and is the archetypal deep learning model.
 
 One of our purposes in this presentation is that the reader explore the notation via several key equations. On a first reading of this section, the reader should not let the notation intimidate them, as it is expected that much of the notation of the equations may be new or forgotten territory. In places where the reader requires more clarity, it is recommended that the reader treat it as motivation for the sections below, where mathematical background is provided, and the equations from this section are further explained. \\
@@ -262,12 +215,8 @@ Different types of neural networks have different types of layers, and in the si
 
 The parameters of each layer $\ell$ are also similar to Model~II (which only has a single layer). Here with Model~III, each layer has a {\em bias vector} $b^{[\ell]}$ and a {\em weight matrix} $W^{[\ell]}$. The dimensions of these vectors and matrices are specific to the architecture of the network, and we fill in these details in Section~\ref{sec:putting-bits-together}. At this point, let us appreciate that Model~III is more complex. For one thing, it has the rich set of parameters $(b^{[1]}, W^{[1]}), \ldots, (b^{[L]}, W^{[L]})$ which can easily involve hundreds of thousands, millions, or billions of individual scalar parameters.  With so many parameters organized in layers, it is generally much more expressive and can capture complex relationships in data. Figure~\ref{FFNN} presents a schematic of such a deep neural network.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data Standardization and Recalling Summation Notation}
 \label{sec:summation}
-
 Raw data often requires \textit{preprocessing} before it can be used in a deep learning model. One such form of preprocessing is \textit{standardization of the data}, also sometimes called \textit{normalization of the data}. This involves subtraction of the mean and division by the standard deviation. Let us describe how this is done here and in the process review summation notation which is needed for other purposes also.
 
 Assume that our data is $x^{(1)}, \ldots, x^{(n)}$ where each $x^{(i)}$ is some sample which is a list or vector of length $p$. We can also denote $x_j^{(i)}$ as the $j$-th element (or coordinate) of the $i$-th data sample. Hence we can think of the data as an $n$ by $p$ table, or matrix, where each row is a sample, and each column is a specific part of that sample, sometimes called a {\em feature}.
@@ -339,175 +288,11 @@ These standardized observations can also be placed in an $n$ by $p$ table just l
 
 Such standardization is useful as it places the dynamic range of the model inputs on a uniform scale and thus improves the numerical stability of algorithms. It also allows us to use similar models for different datasets that may, without standardization, have completely different dynamic ranges. It is one of many tricks of the trade when dealing with data for deep learning. We also chose to present it here as a basic review of summation notation.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{From Basic Sets to Functions}
 \label{sec:sets-and-functions}
 
-Almost all of mathematics starts with the notion of a {\em set}. Formally, a set is an unordered collection of unique items, and sets are typically denoted like $\{7,\, 2.5,\, \texttt{hello}\}$, where the curly braces, $\{\}$, indicate that this is a set. In this particular example the set is composed of the number $7$, the number $2.5$, and the text \texttt{hello}. Like anything in mathematics, we can name sets, and we could have also written ${\cal A} = \{7,\, 2.5,\, \texttt{hello}\}$ to name this set as  ${\cal A}$.
-
-Each of $7$, $2.5$, and \texttt{hello} are {\em elements} of the set ${\cal A}$. And we can write $7 \in {\cal A}$, to imply that $7$ is an element of ${\cal A}$, and similarly with $2.5$ and \texttt{hello}. This ``in'' symbol, $\in$, is useful for statements such as: ``for all $u \in {\cal A}$ do something with $u$''. This means, ``do something with $7$, and do something with $2.5$, and do something with \texttt{hello}''. We can also say that $4 \notin {\cal A}$, because $4$ is not an element of ${\cal A}$. That is $\not\in$ is ``not in'' with the slash across the $\in$ symbol. 
-
-Sometimes we define sets in less explicit ways. For example ${\cal B} = \{0,2,4,6,\ldots,20\}$ is the set of all even numbers between $0$ and $20$ including $0$ and $20$. And this is clear to us even though we did not write out every element of ${\cal B}$. We can also use sets within summation notation. For example, 
-%
-\begin{equation}
-%\label{eq:4-summation-set}
-\sum_{u \in {\cal B}} \sqrt{u},
-\end{equation}
-%
-implies summing up all of the square roots of the elements of the set ${\cal B}$ (as the reader may verify, the result is approximately $31.77$). Note  that our previous way of using summation notation can also be written in terms of sets. For example, the summation in \eqref{eq:4-summation} can be written as,
-%
-\begin{equation}
-%\label{eq:4-summation-set}
-\sum_{i \in \{1,2,3,4\}} h^{(i)},
-\end{equation}
-%
-as this shows that the variable $i$ runs on each element of the set $\{1,2,3,4\}$. 
-
-One very important set is the set of real numbers, denoted ${\mathbb R}$. Unlike the example sets ${\cal A}$, ${\cal B}$, or $\{1,2,3,4\}$ which only have a finite number of elements, the set ${\mathbb R}$ has every number on the real number line and is hence not a finite set. We again can speak about elements of ${\mathbb R}$. So for example it is true that $7 \in {\mathbb R}$,  and it is also true that $\texttt{hello} \not\in {\mathbb R}$. When we consider the parameters of Model~I in \eqref{eq:first-shallow-view}, we can write $b_0 \in {\mathbb R}$ to signify that $b_0$ is a real number.
-
-We can also denote the set of real numbers as $(-\infty, \infty)$ implying that it is the interval of all numbers that are greater than $-\infty$ and less than $\infty$, and this means all real numbers. There are other sets that we can denote in a similar way, for example $[-1,1]$ is the set of all numbers greater than or equal to $-1$ and less than or equal to $1$. Another option is the set $(0,\infty)$ which means the set of all positive numbers (greater than $0$). The set $[0,1]$ is the set of all real number between $0$ and $1$ inclusive, and this is basically all numbers that can describe a probability. A related set $(0,1)$ contains all the numbers between $0$ and $1$ but without the boundaries $0$ and $1$.
-
-One can study and discuss sets much further, and in a more formal manner, or even in very formal means that relate to mathematical logic. But our purpose here is simply to introduce minimal notation. For this, we present a few more sets when dealing with vectors and matrices in the sections below. But first, at this point, with our basic understanding of sets, we are ready to discuss the notion of a {\em function}. 
-
-Put simply, a function is an operation that transforms elements from one set to elements of another set. We can for example denote our function as $f$ and think that it operates on inputs from the set ${\cal A} = \{7,\, 2.5,\, \texttt{hello}\}$ and gives us outputs from the set of real numbers~${\mathbb R}$. Formally this can be denoted as,
-%
-\begin{equation}
-\label{eq:some-func}
-f: {\cal A} \to {\mathbb R},
-\end{equation}
-%
-and this notation tells us that all of the possible inputs to the function $f(~)$ are the elements of~${\cal A}$. It further says that the outputs must be elements of the real numbers ${\mathbb R}$. This declaration of the function via \eqref{eq:some-func} says that for every $u \in A$ we should have an answer of what the function gives, and we denote this as $f(u)$. Note that we sometimes write $f(\cdot)$ to indicate the function where ``$\cdot$'' just stands for the place where the argument $u$ should appear. 
-
-A declaration such as \eqref{eq:some-func} does not define how the function works. To do so, we must be more explicit either with a formula, or an algorithm, or a lookup table. In this example, since the input set has a small number of heterogeneous elements, let us specify the function via a lookup table approach. In particular we can state, $f(7) = 3.4$, $f(2.5) = -2.1$, and $f(\texttt{hello}) = 20.3$. This would then specify exactly what the function $f(~)$ does for every $u \in {\cal A}$. 
-
-In other cases, we can specify how the function works with a formula. This is often common for functions $f: {\mathbb R} \to {\mathbb R}$. An arbitrary example of such a function from ${\mathbb R}$ to ${\mathbb R}$ is,
-%
-\begin{equation}
-\label{eq:arb-func-r-to-r}
-f(u) = 3\cos(e^{u-2}).
-\end{equation}
-%
-The reader would have seen plots previously where such a function, or others, are plotted where on the horizontal axis we plot $u$ and on the vertical axis we plot $3\cos(e^{u-2})$. Importantly, for every $u \in {\mathbb R}$ we have a specific $y = f(u)$, and the plot is a connection of the points $(u,f(u))$ on the plane, essentially for every $u \in {\mathbb R}$ (or realistically on some smaller set which defines the domain of the plot). Also note that in this case the function \eqref{eq:arb-func-r-to-r} is {\em composed} of other operations and functions such as the cosine function and the exponentiation function. Indeed function composition is a very common operation where outputs of one function are used as inputs of another. An example is with Model~III as in \eqref{eq:generalRecursiveModel} where we have $L-1$ function compositions and each function represents the operation of a layer of neural network.
-
-In deep learning we use functions in multiple ways. One way is for constructing models such as I -- III. Another way is for specifying the whole model as a function. A third way is for construction of loss functions. Let us now highlight such uses.
-
-First in terms of construction of models, as we can see for Model~I in \eqref{eq:first-shallow-view},  we define the {\em sigmoid function} 
-%
-\begin{equation}
-\label{eq:sig-as-func}
-\sigma_{\text{Sig}}: {\mathbb R} \to [0,1].
-\end{equation}
-%
-This function takes any real valued scalar as input, denoted as $z$ in \eqref{eq:first-shallow-view}, and the output is a number in the range $[0,1]$. Note that for this sigmoid function we have a formula, $1/(1+e^{-z})$, which exactly describes how to compute $\sigma_{\text{Sig}}(z)$. A schematic plot of this function is inside the right circle in Figure~\ref{fig:niceneuron}.
-
-
-Further, for Model~II in \eqref{eq:softeq} we have the softmax function, $S_{\textrm{Softmax}}(z)$ as a building block. This function can be declared as,
-%
-\begin{equation}
-\label{eq:softmax-as-func}
-S_{\textrm{Softmax}}: {\mathbb R}^K \to {\mathbb R}^K,
-\end{equation}
-%
-since it takes $K$-dimensional vectors as inputs and returns $K$-dimensional vectors as outputs. We describe it further in the next section after we discuss vectors. Similarly, for Model~III, we have activation functions for deep feedforward neural networks, $S^{[\ell]}(\cdot)$. We discuss such activation functions in Section~\ref{sec:putting-bits-together}. 
-
-Now a different use of functions for the neural network models I, II, and III is that the whole model is a function that converts some input~$x$ to an output~$\hat{y}$. In terms of all three models, I -- III, the input $x$ is a $p$-dimensional list of numbers, or vector, a notion further discussed in the next section. For now, let us agree that this set is denoted as~${\mathbb R}^p$. The output is either a scalar value (an element of ${\mathbb R}$ or an element of $[0,1]$) or a vector which is an element of ${\mathbb R}^K$ (a vector or list of $K$ numbers). In particular, here are the functions described by these models.
-
-For Model~I, yielding a probability output we can declare the function of the model as,
-%
-\begin{equation}
-\label{eq:model-I-f}
-f_{(b_0,w)}: {\mathbb R}^p \to [0,1].
-\end{equation}
-%
-The representation in \eqref{eq:model-I-f} then tells us that inputs to the model are $x \in {\mathbb R}^p$ and outputs are going to be $\hat{y} \in [0,1]$. Now notice that we also decorate the function name $f$ with a subscript $(b_0,w)$, and this subscript signifies the parameters of the model. In particular, when we train a deep learning model such as this, we find suitable values of the parameters $b_0$ and $w$ for the data. These parameters then exactly dictate the specifics of our model function $f_{(b_0,w)}(~)$. The way the function actually works was already specified in \eqref{eq:first-shallow-view}. However, some specifics of that presentation, such as the inner product $w^\top x$, are explained in the next section. In Figure~\ref{fig:breast-log-curves} we see two example plots for two different instances of \eqref{eq:model-I-f} where each time we plot $\hat{y} = f_{(b_0,w)}(x)$. In (a) we see a case with $p=1$, and we also see data points for which the function was fit. In (b) we see a case with $p=2$, this time without the data points. 
-
-\begin{figure}[h!] 
-  \begin{subfigure}[b]{0.45\linewidth}
-    \centering
-    \includegraphics[width=0.95\linewidth, height=1.2\textwidth]{figures/Figure-LINK-UNIVARIATE-chapt.pdf} %trim=0 0 0 0, clip
-    \caption{} 
-%    \vspace{2ex}
-  \end{subfigure}%% 
-~
-  \begin{subfigure}[b]{0.45\linewidth}
-   % \centering
-    \includegraphics[width=0.99\linewidth, angle=-5, trim={0 10 30 10}]{figures/logistic-2-features-cropped.pdf} %,trim=100 0 0 0, clip
-    \caption{} 
-%    \vspace{2ex}
-  \end{subfigure} 
-    \caption{Probability output using Model I. % prediction fitto the Wisconsin breast cancer dataset. 
-    (a) A $p=1$ model with one feature. % \texttt{area\_mean} ($x_1$)and a confidence band. 
-    (b) A $p=2$ model based on two features. %5\texttt{area\_mean} ($x_1$) and \texttt{texture\_mean} ($x_2$).
-    }
-    \label{fig:breast-log-curves}
-\end{figure}
-
-
-For Model~II, the function of the model can be specified as,
-%
-\begin{equation}
-\label{eq:model-II-f}
-f_{(b,W)}: {\mathbb R}^p \to {\mathbb R}^K,
-\end{equation}
-%
-and in particular the output in this case is a $K$-dimensional vector. The parameters of the model are $(b,W)$, and more details about how the model operates are in the sequel.
-
-For Model~III, we leave the specification of the type of output open. In some cases it can be a single probability value, so we may specify the output as a value in the set $[0,1]$. In other cases it can be a single real number, as one typically has in {\em regression problems}. Thus the output can be specified as a value in ${\mathbb R}$. We can also use Model~III for multi-class classification like Model~II and then the output is a vector as with Model~II, so the output is a value in ${\mathbb R}^K$ (also sometimes denoted ${\mathbb R}^q$). One way to write this is,
-%
-\begin{equation}
-\label{eq:model-III-f}
-f_{(b^{[1]}, W^{[1]}), \ldots, (b^{[L]}, W^{[L]})}: {\mathbb R}^p \to {\cal O},
-\qquad
-\text{where}
-~{\cal O}~
-\text{is}~[0,1],~\text{or}~
-{\mathbb R},~\text{or}~{\mathbb R}^q.
-\end{equation}
-%
-In all these scenarios of Model~III, the input is similar to the other two models, but for the output type there are several options. Observe also the rich set of parameters that the model has, namely, $(b^{[1]}, W^{[1]}), \ldots, (b^{[L]}, W^{[L]})$.
-
-Another use of functions in deep learning is {\em loss functions}. In general when we train a model we are given a fixed dataset and wish to find the best set of parameters such that the model fits the data. For example with Model~II we would seek the best possible vector $b$ and matrix $W$ that we can find to match the data.  The way that this ``bestness'' is quantified is via a function that we artificially construct for the model. Unlike the model functions \eqref{eq:model-I-f}, \eqref{eq:model-II-f}, and \eqref{eq:model-III-f} which operate on the input $x$, the loss function is a function of the parameters, and the training data is fixed for this function and determines its shape.
-
-
-\begin{figure}[h!] 
-  \begin{subfigure}[b]{0.5\linewidth}
-    \centering
-    \includegraphics[width=0.87\linewidth, trim=30 30 30 30]{figures/Non-convex-3d.png}
-    \caption{} 
-    \vspace{2ex}
-  \end{subfigure}%% 
-  \begin{subfigure}[b]{0.5\linewidth}
-    \centering
-    \includegraphics[width=0.77\linewidth, trim=30 30 30 30]{figures/Non-convex-contour.pdf}
-    \caption{} 
-    \vspace{2ex}
-  \end{subfigure} 
-    \caption{An example plot of an hypothetical loss function (also known as loss landscape) when there are two parameters. (a) A 3D surface plot where we see that the function has multiple valleys (local minima). (b) The same function can be plotted using a contour plot, where each line along a contour maintains the same value of the loss function (like a topographical map).}
-    \label{fig:GD-LR-SR}
-\end{figure}
-
-Now since each type of model has a different set of possible parameters, it is common to just call all the parameters $\theta$. In this case $\theta$ can signify $(b_0,w)$ for Model~I, $(b, W)$ for Model~II, and so fourth. We further call the set of all possible parameters $\Theta$ (and the specific form of this set depends on the model type that we use). The loss function, can then be written as,
-%
-\begin{equation}
-C_{\textrm{Data}}: \Theta \to {\mathbb R},
-\end{equation}
-%
-where the subscript, ``Data'', reminds us that the function's actual form depends on the training data that we have. Now in many cases, each $\theta \in \Theta$ contains many parameters (numbers). Especially for example with Model~III, where one can quickly get millions of parameters in a deep neural network.
-
-
-
-The act of learning the parameters, or training the model, is the act of finding some $\theta \in \Theta$ where $C_{\textrm{Data}}(\theta)$ is as low as possible or close to the lowest value. This is an optimization problem where we try to minimize the loss $C_{\textrm{Data}}(~)$.
-
-Now when the number of parameters in each $\theta$ is $1$ or $2$, it is possible to plot the loss function and then visualize the minimization of the loss. Such plots are typically not done for operational purposes but rather for pedagogic purposes. In particular, the case of $\theta$ being composed of two numbers $\theta_1$ and $\theta_2$ is easy to plot, and such plots allow us to also think about the techniques and challenges of minimizing loss in general. In Figure~\ref{fig:GD-LR-SR} we present a plot of such an hypothetical loss function.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Vectors}
 \label{sec:vectors}
-
 Now that we understand the basics of sets and functions, let us advance to the concept of a {\em vector}. As already seen in Models I -- III, the input $x$ to the model is a vector. This is a list of numbers which encodes some form of input data. Vectors can also appear as outputs. Specifically, in Model~II, and in some variants of Model~III, the output, $\hat{y}$ is also a vector. For example, with Model~II and $K=4$ we may have an output vector such as,
 %
 \begin{equation}
@@ -595,12 +380,8 @@ Here we are averaging the squared errors between each desired (one-hot encoded) 
 
 We note that in practice, for Model~I and Model~II we typically use a cross entropy loss which differs from this simpler mean squared error. For details, see for example Chapter~3 of  \cite{LiquetMokaNazarathy2024DeepLearning}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Matrices}
 \label{sec:matrices}
-
 Now that we have a basic handle on vectors, let us focus on matrices. In this short section, we shall touch upon several uses of matrices within the context of deep learning. One use is to organize stored data as a table. Another use that we touch on very lightly is for describing covariances of variables. A third use, which is the most important for us is linear transformations, and this is the role that the weight matrices (parameters), $W$ in Model~II, and $W^{[\ell]}$ in Model~III play. As with vectors, our exposition is only the tip of the ice-berg and for a more expanded introduction we recommend \cite{boyd2018introduction} as a first reading.
 
 A matrix is a list of numbers organized in rows and columns. For example this is the {\em matrix} $X$ with $4$ rows and $3$ columns,
@@ -794,12 +575,8 @@ w_{5,1}x_1 + w_{5,2} x_2 + w_{5,3} x_3\\
 %
 This representation of $z$ in \eqref{eq:model-ii-vector-add}, exactly agrees with \eqref{eq:small-zk-log-mult} which appeared earlier, before reviewing vector and matrix operations. Note that \eqref{eq:dense-layer} for Model~III defining the action of a layer, $S^{[\ell]}(b^{[\ell]} + W^{[\ell]} u)$ can now also be understood as a similar operation to \eqref{eq:matrix-vector-mult} and \eqref{eq:model-ii-vector-add}. We provide further details in Section~\ref{sec:putting-bits-together}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Further Notes About Vectors and Matrices}
 \label{sec:further-notes}
-
 We should mention that we have only skimmed vector and matrix operations, but our presentation was enough for understanding the representations of models I -- III. In further investigation one may consider many more useful aspects of vectors and matrices in texts such as \cite{boyd2018introduction}, or slightly more advanced linear algebra in \cite{strang2019linear}, or references there-in. 
 
 We also mention that an important part of matrix notation that often appears is the {\em matrix inverse}. We do not cover this concept fully here, but only hint at its meaning. One way to motivate it is to note that there is not an operation for division of matrices, and instead there is the operation of multiplication by an inverse. With two scalar numbers $a \in {\mathbb R}$ and $b \in {\mathbb R}$ with $b \neq 0$, one way to express the division $a/b$ is via the multiplication $a \frac{1}{b}$ or $a \,b^{-1}$ (i.e., multiply $a$ by the inverse of $b$). With matrices, in certain cases, for a matrix $B$ we have a matrix called the {\em inverse} and denoted as $B^{-1}$. Then (when dimensions agree) we may consider multiplications such as $A B^{-1}$ for some matrix $A$. Matrix inverses often appear when one considers systems of linear equations, and in the context of deep learning this may be when considering elementary linear models. See for example chapter~2 of  \cite{LiquetMokaNazarathy2024DeepLearning} for an example of where such concepts are needed. In deep learning models such as our models I -- III here, one does not often encounter matrix inverses.
@@ -810,12 +587,8 @@ We also mention that many matrix and vector operations can be conducted {\em ele
 
 We finally mention the concept of a {\em tensor}. As the reader may have gauged, there is a progression from scalars, to vectors, and then from vectors to matrices. Each time another ``dimension'' also known as ``rank'' or ``order'' is added. Scalars do not need indexing; vectors require a single index; and matrices require two indices. The next level up is a $3$-tensor which can be viewed as a layering of multiple matrices of the same dimension on top of each other. That is, in addition to rows, and columns, there is also a depth component. A very typical application is a red, green, and blue image which can be comprised of three matrices, one for the values of the red pixels, one for the green, and one for the blue. One can even consider higher dimensional tensors, yet in many deep learning models, $3$-tensors suffice. For example in convolutional neural networks, $3$-tensors are used throughout.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gradients}
 \label{sec:gradient}
-
 Before delving into gradients and their pivotal role in deep learning, let us briefly revisit a fundamental concept from calculus, the {\em derivative}. At its core, the derivative provides us with a measure of how a function $f: {\mathbb R} \to {\mathbb R}$ changes as its input varies. Represented by \( \frac{df}{du} \), the derivative signifies the slope of the tangent line to the function's curve at a specific point $u \in {\mathbb R}$. The derivative can also be seen as a function, $f':{\mathbb R} \to {\mathbb R}$, where $f'(u)$ is the derivative at a specific point $u$, namely $f'(u) = \frac{df}{du}$.  
 
 An estimate of the slope of the function (rise divided by run) at a specific point $u$ is
@@ -907,13 +680,8 @@ As an illustration of gradient descent, see Figure~\ref{simpleloss}. First in (a
 
 In Figure~\ref{simpleloss}~(b) we see a similar trajectory, only this time moving on the $(\theta_1, \theta_2)$ plane, and the points are plotted on the surface as $C(\theta^{(i)})$. Here in this example, small steps move in the direction of steepest descent, ultimately reaching a point close to the optimum $\theta^* = (\theta_1^*, \theta_2^*)$. The reader should comprehend that with realistic problems, the number of parameters $d$ can be in the order of millions. Hence each gradient descent iteration is a step in such a high dimensional space, which we cannot visualize. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Putting Bits Together Into a Deep Neural Network}
 \label{sec:putting-bits-together}
-
 Now we are ready to revisit Model~III and fill in a few of the missing details. With deep neural networks, like Model~III, the versatility of the model allows us to in principle approximate any function. In particular, say that in reality we have some unknown function $f^*: \mathbb{R}^p \longrightarrow {\mathbb R}^q$, which is only available to us via data points $(x^{(i)}, y^{(i)})$ with $x^{(i)} \in {\mathbb R}^p$, $y^{(i)} \in {\mathbb R}^q$,  and $y^{(i)} = f^*(x^{(i)})$. If it is a binary classification scenario then $q=1$ and the output can be considered as an element in $[0,1]$. If it is a multi-class classification scenario then $q=K$ and the output can be considered as an element in ${\mathbb R}^K$. If it is a regression problem then again $q=1$ and the output can be any scalar value in ${\mathbb R}$. Finally, in other applications we have vector output ${\mathbb R}^q$ for some $q>1$. In all of these cases, with Model~III we can try and approximate~$f^*(~)$  via the model function \eqref{eq:model-III-f}.
 
 Models I and II are shallow neural networks as they only involve a single layer. As such, they are not able to approximate any arbitrary function very well. However, Model~III when used with multiple layers, is a very rich model, and in principle no matter what $f^*(~)$ we have in reality, with enough training data, and enough computation power for training (gradient descent), we can obtain,
@@ -975,11 +743,8 @@ d = \underbrace{4\times4 + 4}_{\text{Hidden layer 1}} + \underbrace{3\times 4 + 
 %
 Hence, when training such a model via gradient descent, each time we compute the gradient, we obtain a gradient vector in ${\mathbb R}^{61}$. More realistic models may have many more activations (neurons), and sometimes more layers as well. Hence the number of parameters, $d$, easily climbs to millions or more, and this is why training large deep neural networks may be very expensive in terms of time, hardware, and power.
 
-%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{More Advanced Models}
 \label{sec:more-advanced-models}
-
 Deep neural networks have been extended way beyond Model~III, yet the good news is that for more advanced models, generally one does not necessarily need more advanced mathematics. In this section, we present some key mathematical constructs used beyond models I -- III. We present  the {\em convolution} operation used in {\em convolutional neural networks} (CNNs), {\em word embedding} used in sequence models such as {\em recurrent neural network} (RNNs) or {\em long short term memory} (LSTM) models, and the {\em attention mechanism} used in {\em transformer} models that power current state of the art {\em large language models}.
 
 Convolutional neural networks have revolutionized the field of computer vision. Fundamentally, CNNs leverage the concept of the convolution, a mathematical operation that involves applying a {\em filter}, also known as a {\em kernel}, across an input data grid to extract local patterns or features. This process is akin to sliding a window over an image and with each move computing the {\em inner product} between the elements of the (vectorized) kernel and the elements of the corresponding region of the (vectorized) image. The convolution operation between two matrices $W$ and $x$ is denoted as $z = W \star x$. There are different versions of the convolution operation. Here, we present a basic version and for more general scenarios, refer to chapter 6 of  \cite{LiquetMokaNazarathy2024DeepLearning}. To understand this basic version, assume that $x$ is a grayscale image of size $100 \times 100$ and the kernel $W$ is a $3\times 3$ matrix of weight parameters represented as
@@ -1051,12 +816,8 @@ These scores, computed for $j = 1,\ldots,T$, are then passed through the softmax
 
 The probability vector $(\alpha_1, \ldots, \alpha_T)$ represents how much attention each input word $x^{{\langle j \rangle}}$ should receive when we handle the current word $x^{{\langle t \rangle}}$. Intuitively, due to the inner product operation used in \eqref{eq:score}, input words that are more similar to the current word will have higher attention weights, indicating that they are more relevant for generating the output. Conversely, input words that are less relevant will have lower attention weights, meaning they contribute less to the output generation process. By selectively attending to the most relevant parts of the input sequence, the attention mechanism enables us to capture long-range dependencies and learn complex patterns in the data. This yields a setup that is highly effective for a wide range of natural language processing tasks, from language translation to text generation.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion and Outlook}
 \label{sec:conclusion}
-
 While our ultimate goal is deep learning, our focus in this document was mathematical background. For this we covered many elementary components of mathematical notation used in conveying deep learning ideas. Such a survey cannot replace solid mathematical foundations, yet we hope that it enables scientists that do not often use mathematics, to engage with mathematical descriptions of deep learning models and algorithms. We can also consider the presentation here as a gentle introduction (or review) for readers wanting to study our book, {\em Mathematical Engineering of Deep Learning} \cite{LiquetMokaNazarathy2024DeepLearning}, as well as the other books we mentioned at the introduction. While the presentation here does not empower the reader with all of the needed mathematical background, it does enable the reader to follow a solid portion of the content from such a book. Readers wishing to further strengthen their foundations are encouraged to follow standard courses and books in calculus, linear algebra, probability, and statistics.\footnotemark{}
 
 \footnotetext{See \url{https://deeplearningmath.org/} for specific suggestions.}
@@ -1064,8 +825,6 @@ While our ultimate goal is deep learning, our focus in this document was mathema
 This is a summary of the key mathematical content that we covered. We covered sets and their elements, as well as summation notation with sets. We covered basic set notation for the real numbers ${\mathbb R}$ as well as notation for vectors ${\mathbb R}^n$, and matrices ${\mathbb R}^{m \times n}$. We covered declaration of functions using notation such as $f: {\cal A} \to {\cal B}$, where ${\cal A}$ and ${\cal B}$ are sets. We covered basics of vectors, but without their geometric interpretation, a topic that the reader can pick up elsewhere. In particular we covered inner products, Euclidean norms, cosine of the angle, the Euclidean distance between vectors, and mean squared error. We also covered basics of matrices including elementary definitions, diagonal matrices, symmetric matrices, identity matrices, matrix transpose, and importantly matrix multiplication (including matrix-vector multiplication). We also mentioned element-wise operations on vectors and matrices, matrix inverses, and tensors. Finally we covered gradient vectors, the key component for gradient descent learning (optimization). As we saw, this dense manifest of ``basic mathematical knowledge'' can go a long way in helping to describe complex deep learning models, and we revisited our Models I -- III throughout, connecting the basic notation of these models to the elementary mathematical principles.
 
 In terms of models beyond our example models I -- III, we briefly highlighted ideas of convolutions, word embedding, and the attention mechanism. Other aspects of deep learning that we did not cover include generative models such as generative adversarial networks, variational autoencoders, diffusion models, reinforcement learning, and graph neural networks. Admittedly, some of these concepts may require more mathematical background than we provided here. The reader may see chapter~8 of \cite{LiquetMokaNazarathy2024DeepLearning} for an overview of this assortment of topics. 
-
 \bibliographystyle{apalike}
 \bibliography{BibForTheDLBook.bib}
-
 \end{document}
