@@ -5,7 +5,8 @@ import os
 actions_path = os.path.join(os.getcwd(), "actions")
 sys.path.append(actions_path)
 
-from compile import *
+from compile import compile_action
+from grammar import grammar_action
 
 @click.group()
 def cli():
@@ -31,12 +32,18 @@ def config():
 def compile():
     compile_action()
 
+@click.command()
+@click.argument('component')
+def grammar(component):
+    grammar_action(component)
+
 
 cli.add_command(agent)
 cli.add_command(composer)
 cli.add_command(status)
 cli.add_command(config)
 cli.add_command(compile)
+cli.add_command(grammar)
 
 if __name__ == '__main__':
     cli()
