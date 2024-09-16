@@ -161,4 +161,10 @@ cython_debug/
 
 myenv/
 
-example_project/composed_project.*
+example_workspace/composed_project.*
+
+# Ignore PDF files
+*.pdf
+
+# Ignore AUX files
+*.aux
