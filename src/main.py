@@ -2,11 +2,15 @@ import click
 import sys
 import os
 
-actions_path = os.path.join(os.getcwd(), "actions")
-sys.path.append(actions_path)
+from actions import *
 
-from compile import compile_action
-from grammar import grammar_action
+# actions_path = os.path.join(os.getcwd(), "actions")
+# sys.path.append(actions_path)
+
+# from compile import compile_action
+# from grammar import grammar_action
+
+hello()
 
 @click.group()
 def cli():
