@@ -24,7 +24,7 @@ z = b_0 + \underbrace{\sum_{i=1}^p w_i x_i}_{w^\top x}.
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[scale=0.8, trim=0 50 0 50, clip]{figures/logistic_architecture_chapter_book.pdf}
+\includegraphics[scale=0.8, trim=0 50 0 50, clip]{../supporting_files/figures/logistic_architecture_chapter_book.pdf}
 \end{center}
 \caption{The sigmoid model represented with neural network terminology as a shallow neural network. Observe that the artificial neuron is composed of an affine transformation using $z = b_0 + w^\top x$ followed by a non-linear activation transformation 
 $\sigma_{\text{Sig}}(z)$.} %The gray box represents an artificial neuron composed of an affine transformation to create $z$ and an activation $\sigma_{\text{Sig}}$.}
@@ -88,7 +88,7 @@ Like Model~I, that applies the (non-linear) function $\sigma_{\text{Sig}}(~)$ on
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[scale=0.48,trim=50 50 50 50, clip]{figures/figure_softmax.pdf}%softmax_layer.pdf}
+\includegraphics[scale=0.48,trim=50 50 50 50, clip]{../supporting_files/figures/figure_softmax.pdf}%softmax_layer.pdf}
 \end{center}
 \caption{The softmax model as a shallow neural network model with output $\hat{y}$ which is composed of elements $\hat{y}_1, \ldots, \hat{y}_K$,  representing a probability vector. }
 \label{fig:shalsoft}
@@ -134,7 +134,7 @@ Different types of neural networks have different types of layers, and in the si
 
 \begin{figure}[h!] 
 \begin{center}
-\includegraphics[scale=0.7,trim=0 40 0 50, clip]{figures/deep_neural_network1.pdf}
+\includegraphics[scale=0.7,trim=0 40 0 50, clip]{../supporting_files/figures/deep_neural_network1.pdf}
  \caption{A fully connected feedforward deep neural network with multiple hidden layers. The input to the network is the vector $x = (x_1, x_2, x_3, x_4)$ and in this case the output is the scalar~$\hat{y}$. For this particular example the dimensions of $W^{[1]}$ are $4\times 4$, $W^{[2]}$ is $3 \times 4$, $W^{[3]}$ is $5 \times 3$, and $W^{[4]}$ is $1 \times 5$. The bias vectors are of dimension $4$ for $b^{[1]}$, $3$ for $b^{[2]}$, $5$ for $b^{[3]}$, and $1$ (a scalar) for $b^{[4]}$.
  }
     \label{FFNN}

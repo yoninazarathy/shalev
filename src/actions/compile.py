@@ -1,30 +1,33 @@
 import subprocess
 import os
 
-def compile_action(project_path='example_workspace'):
+def compile_action(workspace_data, project_key):
     previous_dir = os.getcwd()
+    project = workspace_data["projects"][project_key]
+    
     try:
-        os.chdir(os.path.join(project_path,'components'))
+        os.chdir(project["components_path"])
         complete_text = create_complete_text('root.tex')
-        with open('../composed_project.tex', 'w') as file:
+        with open(os.path.join(project["build_path"],'composed_project.tex'), 'w') as file:
             file.write(complete_text)
 
+        os.chdir(project["build_path"])
+        print(os.getcwd())
+        result = subprocess.run(['pdflatex', 
+                                '-interaction=nonstopmode', 
+                                f'-output-directory={project["build_path"]}',
+                                os.path.join(project["build_path"],'composed_project.tex')], capture_output=True, text=True)
+
+        if result.returncode == 0:
+            print("LaTeX compilation successful!")
+            print(f"Output document should be in {project["build_path"]}/composed_project.pdf")
+        else:
+            print("LaTeX compilation failed!")
+            print("Error output:")
+            print(result.stdout)
     finally:
         os.chdir(previous_dir)
-
-    result = subprocess.run(['pdflatex', 
-                            '-interaction=nonstopmode', 
-                            f'-output-directory={project_path}',
-                            f'{project_path}/composed_project.tex'], capture_output=True, text=True)
-
-    if result.returncode == 0:
-        print("LaTeX compilation successful!")
-        print(f"Output document should be in {project_path}/composed_project.pdf")
-    else:
-        print("LaTeX compilation failed!")
-        print("Error output:")
-        print(result.stdout)
-
+    
 def process_file(file_path, processed_files=None):
     # Initialize the set to track already processed files (to avoid circular includes)
     if processed_files is None:

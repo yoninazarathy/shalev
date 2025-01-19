@@ -2,8 +2,32 @@ import os
 from openai import OpenAI
 import difflib
 import yaml
+from pprint import pprint
 
 client = OpenAI()
+
+def agent_action(workspace_data, action_prompt_templates, action, project, component):
+    print(f"{action=}")
+    print(f"{project=}")
+    print(f"{component=}")
+    action_prompt_template = action_prompt_templates[action]
+    make_LLM_messages(action_prompt_template)
+
+def make_LLM_messages(action_prompt_template):
+    pprint(action_prompt_template)
+
+    messages=[
+                {
+                "role": "system",
+                "content": action_prompt_template["system_prompt"],
+                },
+                {
+                "role": "user",
+                "content": action_prompt_template["user_prompt"]
+                }
+            ]
+    pprint(messages)
+
 
 def compare_strings_succinct(original, corrected):
     diff = difflib.unified_diff(original.split(), corrected.split(), lineterm='')

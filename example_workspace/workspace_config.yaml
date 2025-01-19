@@ -1,0 +1,23 @@
+workspace:
+  name: "LaTeXPaper_2_Beamer"
+  description: "This is the main workspace containing several projects."
+  action_prompts_folder: "action_prompts"
+
+  projects:
+    - name: "BookChapter"
+      short_name: "chap"
+      description: "This is the book chapter in the original form created."
+      project_folder: "project_1"
+      components_folder: "components"
+      supporting_files_folder: "supporting_files"
+      results_folder: "results"
+      build_folder: "build"
+
+    - name: "Presentation"
+      short_name: "pres"
+      description: "This is the book chapter in the original form created."
+      project_folder: "project_2"
+      components_folder: "components"
+      supporting_files_folder: "supporting_files"
+      results_folder: "results"
+      build_folder: "build"

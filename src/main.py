@@ -1,53 +1,42 @@
 import click
 import sys
-import os
-
+from pprint import pprint
 from actions import *
+from setup import *
 
-# actions_path = os.path.join(os.getcwd(), "actions")
-# sys.path.append(actions_path)
+workspace_data = setup_workspace()
+action_prompt_templates = setup_action_prompt_templates(workspace_data["action_prompts_path"])
 
-# from compile import compile_action
-# from grammar import grammar_action
-
-hello()
 
 @click.group()
 def cli():
     pass
 
 @click.command()
-def agent():
-    print("agent")
+@click.argument('project')
+def compile(project):
+    compile_action(workspace_data, project)
 
 @click.command()
-def composer():
-    print("composer")
-
-@click.command()
-def status():
-    print("status")
-
-@click.command()
-def config():
-    print("config")
-
-@click.command()
-def compile():
-    compile_action()
-
-@click.command()
+@click.argument('action')
+@click.argument('project')
 @click.argument('component')
-def grammar(component):
-    grammar_action(component)
+def agent(action, project, component):
+    agent_action(workspace_data, action_prompt_templates, action, project, component)
+
+@click.command()
+@click.option('--long', is_flag=True, help="Show full info.")
+def info(long):
+    if long:
+        pprint(workspace_data)
+        pprint(action_prompt_templates)
+    else:
+        workspace_info(workspace_data, action_prompt_templates)
 
 
 cli.add_command(agent)
-cli.add_command(composer)
-cli.add_command(status)
-cli.add_command(config)
 cli.add_command(compile)
-cli.add_command(grammar)
+cli.add_command(info)
 
 if __name__ == '__main__':
     cli()

@@ -1,0 +1,16 @@
+agent_command_name: st
+main_source_label: __single_input_component_text
+additional_source_label: __single_example_component_text
+system_prompt:
+  content: |
+    You will be provided with text under the title INPUT.
+    You will also be provided another body of text under the title EXAMPLE. 
+    Your task is to modify the input to have a similar style to EXAMPLE. 
+    Return the modified text without any explanations.
+    Do not make any changes to meaning, only to the writing writing style based on EXAMPLE.
+user_prompt: 
+  content: |
+    **INPUT**
+    __single_input_component_text
+    **EXAMPLE**
+    __single_example_component_text

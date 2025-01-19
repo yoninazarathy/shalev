@@ -95,3 +95,21 @@ Currently execution is via a bash script (tested on Mac).
 1. Clone the repo.
 1. `chmod +x shalev`
 1. `export PATH="$(pwd):$PATH"`
+
+
+## Misc
+
+```
+export SHALEV_WORKSPACE="$(pwd)/example_workspace"
+```
+
+Within project
+Across projects
+
+Within component
+Across components
+
+
+Action on single component. 
+
+Action can be unrolling or not. 
