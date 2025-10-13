@@ -113,3 +113,15 @@ Across components
 Action on single component. 
 
 Action can be unrolling or not. 
+
+## Developer install
+
+```
+git clone git@github.com:yoninazarathy/shalev.git
+cd shalev
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
+shalev
+```
