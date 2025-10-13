@@ -144,5 +144,5 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 pip install -e .
-shalev
+shalev config --workspace example_workspace ????QQQQ #create a .shalev.yaml file...
 ```
