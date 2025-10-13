@@ -114,6 +114,27 @@ Action on single component.
 
 Action can be unrolling or not. 
 
+
+## More spec Shalev CLI
+
+There are three main command roots:
+
+```
+shalev compose ...
+```
+
+```
+shalev agent ...
+```
+
+```
+shalev config ...
+```
+
+```
+shalev status ...
+```
+
 ## Developer install
 
 ```

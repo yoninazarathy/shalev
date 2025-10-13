@@ -10,31 +10,58 @@ from shalev.actions import *
 def cli():
     pass
 
+
+##################
+# shalev compose #
+##################
 @click.command()
 @click.argument('project')
-def compile(project):
-    compile_action(workspace_data, project)
+# @click.option('--project', default=".", help="Project name or path (default: current directory)")
+def compose(project = "."):
+    print(f"doing shalev compose on project {project}")
+    # print(f"{project=}")
+    # compose_action(workspace_data, project) QQQQ-need to fix
 
+################
+# shalev agent #
+################
 @click.command()
 @click.argument('action')
 @click.argument('project')
 @click.argument('component')
 def agent(action, project, component):
-    agent_action(workspace_data, action_prompt_templates, action, project, component)
+    print(f"doing shalev action {action} on project {project} and component {component}")
+    # agent_action(workspace_data, action_prompt_templates, action, project, component)
 
+
+#################
+# shalev config #
+#################
 @click.command()
-@click.option('--long', is_flag=True, help="Show full info.")
-def info(long):
-    if long:
-        pprint(workspace_data)
-        pprint(action_prompt_templates)
-    else:
-        workspace_info(workspace_data, action_prompt_templates)
+def config():
+    print("doing config....QQQQ")
+
+#################
+# shalev status #
+#################
+@click.command()
+# @click.option('--long', is_flag=True, help="Show full status.")
+def status():
+    print("doing status.... QQQQ")
+    # if long:
+    #     pprint(workspace_data)
+    #     pprint(action_prompt_templates)
+    # else:
+    #     workspace_status(workspace_data, action_prompt_templates)
 
 
+###########################
+# putting it all together #
+###########################
+cli.add_command(compose)
 cli.add_command(agent)
-cli.add_command(compile)
-cli.add_command(info)
+cli.add_command(status)
+cli.add_command(config)
 
 def main():
     cli()
