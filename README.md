@@ -56,7 +56,7 @@ This structure then allows the main action of the SCF, **compile** to execute. T
 shalev compile
 ```
 
-Note that while some actions come with the Shalev CLI, most actions are project specific. Python code for all actions is stored in the `actions` folder which has the `SCF` and `SAF` subfolders. So for example for `compile`, there is the `compile.py` file inside `actions/SCF` and this script would first use another action which comes with the Shalev Python package, `composeproject`, and then execute LaTeX (pandoc or similar) on the intermediate composed project (where all sub components were included). Note that there is also a `tmp` folder where intermediate files are stored.
+Note that while some actions come with the Shalev CLI, most actions are project specific. YAML specification for all actions is stored in the `actions` folder which has the `SCF` and `SAF` subfolders. So for example for `compile`, there is the `compile.py` file inside `actions/SCF` and this script would first use another action which comes with the Shalev Python package, `composeproject`, and then execute LaTeX (pandoc or similar) on the intermediate composed project (where all sub components were included). Note that there is also a `tmp` folder where intermediate files are stored.
 
 ## Actions of the SAF
 

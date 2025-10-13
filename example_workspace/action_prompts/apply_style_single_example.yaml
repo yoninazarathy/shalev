@@ -7,7 +7,7 @@ system_prompt:
     You will also be provided another body of text under the title EXAMPLE. 
     Your task is to modify the input to have a similar style to EXAMPLE. 
     Return the modified text without any explanations.
-    Do not make any changes to meaning, only to the writing writing style based on EXAMPLE.
+    Do not make any changes to meaning, only to the writing style based on EXAMPLE.
 user_prompt: 
   content: |
     **INPUT**

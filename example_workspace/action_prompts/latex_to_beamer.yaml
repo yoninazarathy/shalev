@@ -3,7 +3,7 @@ main_source_label: __single_input_component_text
 system_prompt:
   content: |
     You will be provided with LaTeX source.
-    Your task is to convert it to multiple beamer slides latex. In your output, ignore the beamer boiler plate code.
+    Your task is to convert it to multiple beamer slides in latex. In your output, ignore the beamer boiler plate code.
     Only use \begin{frame} and \end{frame} in terms of beamer. 
     Have only up to 5 formulas per beamer slide.  
     Return the modified text without any explanations.

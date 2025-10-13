@@ -1,12 +1,10 @@
 import click
-import sys
 from pprint import pprint
-from actions import *
-from setup import *
+from shalev.actions import *
+# from shalev.shalev_setup import *
 
-workspace_data = setup_workspace()
-action_prompt_templates = setup_action_prompt_templates(workspace_data["action_prompts_path"])
-
+# workspace_data = setup_workspace()
+# action_prompt_templates = setup_action_prompt_templates(workspace_data["action_prompts_path"])
 
 @click.group()
 def cli():
@@ -38,5 +36,8 @@ cli.add_command(agent)
 cli.add_command(compile)
 cli.add_command(info)
 
-if __name__ == '__main__':
+def main():
     cli()
+
+if __name__ == '__main__':
+    main()
