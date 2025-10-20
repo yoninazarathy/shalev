@@ -1,20 +1,23 @@
 import click
 import structlog
 from pprint import pprint
-from shalev.actions import *
 
+#################
+# logging setup #
+#################
 structlog.configure(
     processors=[
         structlog.processors.JSONRenderer()
     ]
 )
 log = structlog.get_logger()
-log.info("user_logged_in", user="alice", status="ok") #QQQQ consider if it is what we need
+# log.info("user_logged_in", user="alice", status="ok") #QQQQ consider if it is what we need
 
 
-# from shalev.shalev_setup import *
+from shalev.actions import *
+from shalev.shalev_setup import *
 
-# workspace_data = setup_workspace()
+workspace_data = setup_workspace()
 # action_prompt_templates = setup_action_prompt_templates(workspace_data["action_prompts_path"])
 
 @click.group()
