@@ -1,6 +1,17 @@
 import click
+import structlog
 from pprint import pprint
 from shalev.actions import *
+
+structlog.configure(
+    processors=[
+        structlog.processors.JSONRenderer()
+    ]
+)
+log = structlog.get_logger()
+log.info("user_logged_in", user="alice", status="ok") #QQQQ consider if it is what we need
+
+
 # from shalev.shalev_setup import *
 
 # workspace_data = setup_workspace()
