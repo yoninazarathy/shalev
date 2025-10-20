@@ -137,6 +137,8 @@ shalev status ...
 
 ## Developer install
 
+Steps for installation:
+
 ```
 git clone git@github.com:yoninazarathy/shalev.git
 cd shalev
@@ -144,5 +146,10 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 pip install -e .
-shalev config --workspace example_workspace ????QQQQ #create a .shalev.yaml file...
+```
+
+Optional if you don't have a `.shalev.yaml` file:
+
+```
+shalev config -w example_workspace
 ```
