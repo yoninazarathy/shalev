@@ -1,4 +1,5 @@
-# import os
+import os
+import sys
 import yaml
 # import glob
 # from pathlib import Path
@@ -17,17 +18,30 @@ import yaml
 #     return short_name_dict
 
 def setup_workspace(fn = ".shalev.yaml"):
-    # log.info("began setup_workspace") QQQQ doesn't yet work
-    workspace_data = {}
-    # workspace_dir = os.getenv("SHALEV_WORKSPACE")
-    # if workspace_dir is None:
-    #     raise EnvironmentError("SHALEV_WORKSPACE environment variable is not set.")
-    # else:
-    #     # print(f"{workspace_dir=}")
-    #     pass
+    try:
+        with open(fn) as dot_shalev_file:
+            dot_shalev_dict = yaml.safe_load(dot_shalev_file)
+            if "workspace_folder" in dot_shalev_dict:
+                workspace_folder = dot_shalev_dict["workspace_folder"]
+            else:
+                print(f"workspace_folder is not properly set in {fn}")
+                sys.exit(1)
+    except FileNotFoundError:
+        print(f"Error: {fn} file does not exist", file=sys.stderr)
+        sys.exit(1)
+    # print("QQQQ:", workspace_folder) todo - log this is our workspace_folder
 
-    # with open(os.path.join(workspace_dir, "workspace_config.yaml")) as config_file:
-    #     config = yaml.safe_load(config_file)
+
+    workspace_data = {}
+
+    try:
+        fn = os.path.join(workspace_folder, "workspace_config.yaml")
+        with open(fn) as config_file:
+            config = yaml.safe_load(config_file)
+            print(config)
+    except FileNotFoundError:
+        print(f"Error: {fn} file does not exist", file=sys.stderr)
+        sys.exit(1)
 
     # workspace_name = config["workspace"]["name"]
     # # print(f"{workspace_name=}")
