@@ -17,6 +17,13 @@ import yaml
 #         short_name_dict[short_name] = component
 #     return short_name_dict
 
+class FolderStructureError(Exception):
+    pass
+
+def check_workspace_data_valid(workspace_data):
+    raise FolderStructureError("QQQQ") # put here details of which folders fail
+    pass
+
 def setup_workspace(fn = ".shalev.yaml"):
     try:
         with open(fn) as dot_shalev_file:
@@ -33,7 +40,16 @@ def setup_workspace(fn = ".shalev.yaml"):
     try:
         fn = os.path.join(workspace_folder, "workspace_config.yaml")
         with open(fn) as config_file:
-            workspace_data = yaml.safe_load(config_file)
+            try:
+                workspace_data = yaml.safe_load(config_file)
+            except yaml.YAMLError as e:
+                print("YAML error:", e, file=sys.stderr)
+                sys.exit(1)
+            try:
+                check_workspace_data_valid(workspace_data)
+            except FolderStructureError as e:
+                print("Folder Structure error:", e, file=sys.stderr)
+                sys.exit(1)
             return workspace_data
     except FileNotFoundError:
         print(f"Error: {fn} file does not exist", file=sys.stderr)
