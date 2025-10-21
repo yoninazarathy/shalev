@@ -61,7 +61,7 @@ def config():
 @click.command()
 # @click.option('--long', is_flag=True, help="Show full status.")
 def status():
-    print("doing status.... QQQQ")
+    pprint(workspace_data)
     # if long:
     #     pprint(workspace_data)
     #     pprint(action_prompt_templates)

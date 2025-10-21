@@ -30,15 +30,11 @@ def setup_workspace(fn = ".shalev.yaml"):
         print(f"Error: {fn} file does not exist", file=sys.stderr)
         sys.exit(1)
     # print("QQQQ:", workspace_folder) todo - log this is our workspace_folder
-
-
-    workspace_data = {}
-
     try:
         fn = os.path.join(workspace_folder, "workspace_config.yaml")
         with open(fn) as config_file:
-            config = yaml.safe_load(config_file)
-            print(config)
+            workspace_data = yaml.safe_load(config_file)
+            return workspace_data
     except FileNotFoundError:
         print(f"Error: {fn} file does not exist", file=sys.stderr)
         sys.exit(1)
