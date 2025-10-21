@@ -153,3 +153,11 @@ Optional if you don't have a `.shalev.yaml` file:
 ```
 shalev config -w example_workspace
 ```
+
+Now run:
+
+```
+shalev status
+```
+
+You should see your `workspace_config.yaml` file.
