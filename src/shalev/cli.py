@@ -14,7 +14,8 @@ log = structlog.get_logger()
 # log.info("user_logged_in", user="alice", status="ok") #QQQQ consider if it is what we need
 
 
-from shalev.actions import *
+from shalev.agent_actions import *
+from shalev.compose_actions import *
 from shalev.shalev_setup import *
 
 workspace_data = setup_workspace()
@@ -33,8 +34,7 @@ def cli():
 # @click.option('--project', default=".", help="Project name or path (default: current directory)")
 def compose(project = "."):
     print(f"doing shalev compose on project {project}")
-    # print(f"{project=}")
-    # compose_action(workspace_data, project) QQQQ-need to fix
+    compose_action(get_project_by_handle(workspace_data, project))
 
 ################
 # shalev agent #

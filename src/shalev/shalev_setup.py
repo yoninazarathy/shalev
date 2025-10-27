@@ -1,6 +1,29 @@
 import os
 import sys
 import yaml
+from dataclasses import dataclass
+from typing import List, Dict
+
+@dataclass
+class ShalevProject:
+    build_folder: str
+    components_folder: str
+    description: str
+    name: str
+    project_folder: str
+    project_handle: str
+    results_folder: str
+    supporting_files_folder: str
+
+@dataclass
+class ShalevWorkspace:
+    action_prompts_folder: str
+    description: str
+    name: str
+    projects: List[ShalevProject]
+    workspace_system_prompts: Dict[str, str]
+
+
 # import glob
 # from pathlib import Path
 
@@ -20,8 +43,26 @@ import yaml
 class FolderStructureError(Exception):
     pass
 
+def workspace_from_dict(data: dict) -> ShalevWorkspace:
+    ws = data['workspace']
+    projects = [ShalevProject(**proj) for proj in ws['projects']]
+    return ShalevWorkspace(
+        action_prompts_folder = ws['action_prompts_folder'],
+        description = ws['description'],
+        name = ws['name'],
+        projects = projects,
+        workspace_system_prompts = ws['workspace_system_prompts']
+    )
+
+def get_project_by_handle(workspace: ShalevWorkspace, handle: str) -> ShalevProject:
+    for proj in workspace.projects:
+        if proj.project_handle == handle:
+            return proj
+    raise ValueError(f"Project with handle '{handle}' not found.")
+
+
 def check_workspace_data_valid(workspace_data):
-    raise FolderStructureError("QQQQ") # put here details of which folders fail
+    # raise FolderStructureError("QQQQ") # put here details of which folders fail
     pass
 
 def setup_workspace(fn = ".shalev.yaml"):
@@ -50,7 +91,7 @@ def setup_workspace(fn = ".shalev.yaml"):
             except FolderStructureError as e:
                 print("Folder Structure error:", e, file=sys.stderr)
                 sys.exit(1)
-            return workspace_data
+            return workspace_from_dict(workspace_data)
     except FileNotFoundError:
         print(f"Error: {fn} file does not exist", file=sys.stderr)
         sys.exit(1)
