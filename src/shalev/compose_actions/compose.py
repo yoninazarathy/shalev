@@ -5,8 +5,9 @@ from ..shalev_setup import *
 
 
 def compose_action(shalev_project: ShalevProject):
+    print("compose!!!!")
     # previous_dir = os.getcwd()
-    print(shalev_project)
+    # pprint(shalev_project)
     # print(get_project_by_handle(workspace_data, project_handle))
     # try:
     #     os.chdir(project["components_path"])

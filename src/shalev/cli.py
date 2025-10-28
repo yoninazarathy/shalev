@@ -33,7 +33,6 @@ def cli():
 @click.argument('project')
 # @click.option('--project', default=".", help="Project name or path (default: current directory)")
 def compose(project = "."):
-    print(f"doing shalev compose on project {project}")
     compose_action(get_project_by_handle(workspace_data, project))
 
 ################

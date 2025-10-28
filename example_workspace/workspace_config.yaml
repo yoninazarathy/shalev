@@ -8,7 +8,7 @@ workspace:
     - name: Book Chapter
       project_handle: chap
       description: This is the book chapter in the original form created. 
-      project_folder: ./book_chapter_project
+      project_folder: book_chapter_project
       # These are subfolders within project_folder (you rarely change these settings)
       components_folder: components
       supporting_files_folder: supporting_files
