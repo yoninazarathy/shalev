@@ -25,7 +25,7 @@ def compose_action(shalev_project: ShalevProject):
 
             if result.returncode == 0:
                 print("LaTeX compilation successful!")
-                print(f"Output document should be in {project["build_path"]}/composed_project.pdf")
+                print(f"Output document should be in {shalev_project.build_folder}/composed_project.pdf")
             else:
                 print("LaTeX compilation failed!")
                 print("Error output:")
