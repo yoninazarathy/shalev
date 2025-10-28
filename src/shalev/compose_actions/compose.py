@@ -5,32 +5,39 @@ from ..shalev_setup import *
 
 
 def compose_action(shalev_project: ShalevProject):
-    print("compose!!!!")
-    # previous_dir = os.getcwd()
-    # pprint(shalev_project)
-    # print(get_project_by_handle(workspace_data, project_handle))
-    # try:
-    #     os.chdir(project["components_path"])
-    #     complete_text = create_complete_text('root.tex')
-    #     with open(os.path.join(project["build_path"],'composed_project.tex'), 'w') as file:
-    #         file.write(complete_text)
+    try:
+        complete_text = create_complete_text(shalev_project.root_component)
+        # print(complete_text)
+        composed_project_path = os.path.join(shalev_project.build_folder,'composed_project.tex')
+        with open(composed_project_path, 'w') as file:
+            file.write(complete_text)
+            print(f"Generated composed project file: {composed_project_path}")
+        try:
+            previous_dir = os.getcwd()
+            os.chdir(shalev_project.build_folder)
+            print(os.getcwd())
+            result = subprocess.run(['pdflatex', 
+                                    '-interaction=nonstopmode', 
+                                    '-output-directory=.',
+                                    'composed_project.tex'], 
+                                    capture_output=True, 
+                                    text=True)
 
-    #     os.chdir(project["build_path"])
-    #     print(os.getcwd())
-    #     result = subprocess.run(['pdflatex', 
-    #                             '-interaction=nonstopmode', 
-    #                             f'-output-directory={project["build_path"]}',
-    #                             os.path.join(project["build_path"],'composed_project.tex')], capture_output=True, text=True)
+            if result.returncode == 0:
+                print("LaTeX compilation successful!")
+                print(f"Output document should be in {project["build_path"]}/composed_project.pdf")
+            else:
+                print("LaTeX compilation failed!")
+                print("Error output:")
+                print(result.stdout)
+        finally:
+            os.chdir(previous_dir)
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
-    #     if result.returncode == 0:
-    #         print("LaTeX compilation successful!")
-    #         print(f"Output document should be in {project["build_path"]}/composed_project.pdf")
-    #     else:
-    #         print("LaTeX compilation failed!")
-    #         print("Error output:")
-    #         print(result.stdout)
-    # finally:
-    #     os.chdir(previous_dir)
+
+ 
     
 def process_file(file_path, processed_files=None):
     # Initialize the set to track already processed files (to avoid circular includes)
@@ -67,10 +74,10 @@ def process_file(file_path, processed_files=None):
     
     return ''.join(complete_text)
 
-# def create_complete_text(root_file):
-#     try:
-#         complete_text = process_file(root_file)
-#         return complete_text
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         return None
+def create_complete_text(root_file):
+    try:
+        complete_text = process_file(root_file)
+        return complete_text
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
