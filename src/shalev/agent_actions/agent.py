@@ -6,6 +6,10 @@
 
 # client = OpenAI()
 
+def agent_action():
+    print("agent action")
+    pass
+
 # def agent_action(workspace_data, action_prompt_templates, action, project, component):
 #     print(f"{action=}")
 #     print(f"{project=}")

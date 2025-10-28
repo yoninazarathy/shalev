@@ -1,4 +1,3 @@
-# from ..composer_actions.compose import compile_action
-# from .agent import agent_action
+from .agent import agent_action
 
-# __all__ = ['compile_action', 'agent_action']
+__all__ = ['agent_action']
