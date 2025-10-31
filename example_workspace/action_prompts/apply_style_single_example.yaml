@@ -1,6 +1,5 @@
 agent_command_name: st
 main_source_label: __single_input_component_text
-additional_source_label: __single_example_component_text
 system_prompt:
   content: |
     You will be provided with text under the title INPUT.

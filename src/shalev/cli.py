@@ -44,7 +44,7 @@ def compose(project = "."):
 @click.argument('component')
 def agent(action, project, component):
     print(f"doing shalev action {action} on project {project} and component {component}")
-    agent_action()
+    agent_action(workspace_data, project, action, component)
     # agent_action(workspace_data, action_prompt_templates, action, project, component)
 
 

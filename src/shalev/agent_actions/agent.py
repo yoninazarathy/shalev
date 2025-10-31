@@ -1,20 +1,40 @@
-# import os
-# from openai import OpenAI
+import os
+from openai import OpenAI
+from dataclasses import dataclass, field
 # import difflib
-# import yaml
-# from pprint import pprint
+import yaml
+from pprint import pprint
 
-# client = OpenAI()
 
-def agent_action():
-    print("agent action")
-    pass
+client = OpenAI()
 
-# def agent_action(workspace_data, action_prompt_templates, action, project, component):
-#     print(f"{action=}")
-#     print(f"{project=}")
-#     print(f"{component=}")
-#     action_prompt_template = action_prompt_templates[action]
+@dataclass
+class ActionPrompt:
+    agent_command_name: str
+    main_source_label: str
+    system_prompt: dict
+    user_prompt: dict
+    # additional_source_label: field(repr = False) QQQQ
+
+def load_agent_configs_from_folder(folder_path: str) -> List[ActionPrompt]:
+    agent_configs = []
+    for filename in os.listdir(folder_path):
+        if filename.endswith('.yaml') or filename.endswith('.yml'):
+            with open(os.path.join(folder_path, filename), 'r') as f:
+                data = yaml.safe_load(f)
+            agent_configs.append(ActionPrompt(**data))
+    return agent_configs
+
+
+def agent_action(workspace_data: ShalevWorkspace, project_handle, action_handle, component_handle):
+    print(f"{workspace_data.action_prompts_folder=}")
+    agent_configs = load_agent_configs_from_folder(workspace_data.action_prompts_folder) #QQQQ do someplace else
+    # print(f"{workspace_data=}")
+    # print(f"{project_handle=}")
+    # print(f"{action_handle=}")
+    # print(f"{component_handle=}")
+    # action_prompt_template = action_prompt_templates[action]
+    print(agent_configs)
 #     make_LLM_messages(action_prompt_template)
 
 # def make_LLM_messages(action_prompt_template):
