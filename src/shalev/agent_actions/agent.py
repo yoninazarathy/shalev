@@ -1,12 +1,16 @@
 import os
+import sys
 from openai import OpenAI
 from dataclasses import dataclass, field
 # import difflib
 import yaml
 from pprint import pprint
 
-
-client = OpenAI()
+try:
+    client = OpenAI()
+except:
+    print(f"Problem with OpenAI client - check API key.", file=sys.stderr)
+    sys.exit(1)
 
 @dataclass
 class ActionPrompt:
@@ -17,41 +21,47 @@ class ActionPrompt:
     # additional_source_label: field(repr = False) QQQQ
 
 def load_agent_configs_from_folder(folder_path: str) -> List[ActionPrompt]:
-    agent_configs = []
+    agent_configs = {}
     for filename in os.listdir(folder_path):
         if filename.endswith('.yaml') or filename.endswith('.yml'):
             with open(os.path.join(folder_path, filename), 'r') as f:
                 data = yaml.safe_load(f)
-            agent_configs.append(ActionPrompt(**data))
+            action_prompt = ActionPrompt(**data)
+            agent_configs[action_prompt.agent_command_name] = action_prompt
     return agent_configs
 
 
 def agent_action(workspace_data: ShalevWorkspace, project_handle, action_handle, component_handle):
-    print(f"{workspace_data.action_prompts_folder=}")
+    # print(f"{workspace_data.action_prompts_folder=}")
     agent_configs = load_agent_configs_from_folder(workspace_data.action_prompts_folder) #QQQQ do someplace else
-    # print(f"{workspace_data=}")
-    # print(f"{project_handle=}")
-    # print(f"{action_handle=}")
-    # print(f"{component_handle=}")
-    # action_prompt_template = action_prompt_templates[action]
-    print(agent_configs)
-#     make_LLM_messages(action_prompt_template)
+    try:
+        action_prompt = agent_configs[action_handle]
+    except KeyError:
+        print(f"No agent action {action_handle}.", file=sys.stderr)
+        sys.exit(1)
+    pprint(workspace_data)
+    component_string = "Hellos I am a great persons."
+    messages = make_LLM_messages(action_prompt, component_string)
+    try:
+        response = client.chat.completions.create(model="gpt-4o",messages=messages)
+    except Exception as e:
+        print(f"OpenAI API error: {e}")
+        sys.exit(1)
+    response_string = response.choices[0].message.content
+    print(response_string)
 
-# def make_LLM_messages(action_prompt_template):
-#     pprint(action_prompt_template)
-
-#     messages=[
-#                 {
-#                 "role": "system",
-#                 "content": action_prompt_template["system_prompt"],
-#                 },
-#                 {
-#                 "role": "user",
-#                 "content": action_prompt_template["user_prompt"]
-#                 }
-#             ]
-#     pprint(messages)
-
+def make_LLM_messages(action_prompt, component_string):
+    messages=[
+                {
+                "role": "system",
+                "content": action_prompt.system_prompt["content"],
+                },
+                {
+                "role": "user",
+                "content": component_string
+                }
+            ]
+    return messages
 
 # def compare_strings_succinct(original, corrected):
 #     diff = difflib.unified_diff(original.split(), corrected.split(), lineterm='')
