@@ -32,8 +32,8 @@ def cli():
 @click.command()
 @click.argument('project')
 # @click.option('--project', default=".", help="Project name or path (default: current directory)")
-def compose(project = "."):
-    compose_action(get_project_by_handle(workspace_data, project))
+def compose(project):
+    compose_action(workspace_data.projects[project])
 
 ################
 # shalev agent #

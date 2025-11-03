@@ -23,7 +23,7 @@ class ShalevWorkspace:
     action_prompts_folder: str
     description: str
     name: str
-    projects: List[ShalevProject]
+    projects: Dict[str, ShalevProject]
     workspace_system_prompts: Dict[str, str]
 
 def add_prefix_to_project_folders(proj: ShalevProject, prefix: str):
@@ -39,28 +39,13 @@ def add_prefix_to_workspace_folders(ws: ShalevWorkspace, prefix: str):
     ws.action_prompts_folder = os.path.join(prefix, ws.action_prompts_folder)
     return ws
 
-# import glob
-# from pathlib import Path
-
-# def assign_short_names(components):
-#     short_name_dict = {}
-#     for component in components:
-#         base_name = Path(component).stem
-#         short_name = base_name[:4]
-#         original_short_name = short_name
-#         counter = 1
-#         while short_name in short_name_dict:
-#             short_name = f"{original_short_name[:3]}{counter}"  # Adjust length to ensure it's still 4 chars
-#             counter += 1
-#         short_name_dict[short_name] = component
-#     return short_name_dict
-
 class FolderStructureError(Exception):
     pass
 
 def workspace_from_dict(data: dict, workspace_folder: str) -> ShalevWorkspace:
     ws = data['workspace']
-    projects = [add_prefix_to_project_folders(ShalevProject(**proj), workspace_folder) for proj in ws['projects']]
+    projects_list = [add_prefix_to_project_folders(ShalevProject(**proj), workspace_folder) for proj in ws['projects']]
+    projects = {proj.project_handle: proj for proj in projects_list} #QQQQ deal with error if two projects have same handle
     return add_prefix_to_workspace_folders(ShalevWorkspace(
         action_prompts_folder = ws['action_prompts_folder'],
         description = ws['description'],
@@ -69,22 +54,10 @@ def workspace_from_dict(data: dict, workspace_folder: str) -> ShalevWorkspace:
         workspace_system_prompts = ws['workspace_system_prompts']
     ), workspace_folder)
 
-def get_project_by_handle(workspace: ShalevWorkspace, handle: str) -> ShalevProject:
-    for proj in workspace.projects:
-        if proj.project_handle == handle:
-            return proj
-    raise ValueError(f"Project with handle '{handle}' not found.")
-
-
-def check_workspace_data_valid(workspace_data: ShalevWorkspace):
-    # raise FolderStructureError("QQQQ") # put here details of which folders fail
-    pprint(workspace_data)
-    pass
-
 def check_workspace_data_valid(workspace_data: ShalevWorkspace):
     folders_to_check = []
     folders_to_check.append(workspace_data.action_prompts_folder)
-    for project in workspace_data.projects:
+    for project in workspace_data.projects.values():
         folders_to_check.extend([
             project.project_folder,
             project.build_folder,
