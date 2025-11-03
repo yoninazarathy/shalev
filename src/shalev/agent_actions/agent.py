@@ -6,6 +6,8 @@ from dataclasses import dataclass, field
 import yaml
 from pprint import pprint
 
+SIZE_LIMIT = 30000
+
 try:
     client = OpenAI()
 except:
@@ -39,8 +41,16 @@ def agent_action(workspace_data: ShalevWorkspace, project_handle, action_handle,
     except KeyError:
         print(f"No agent action {action_handle}.", file=sys.stderr)
         sys.exit(1)
-    pprint(workspace_data)
-    component_string = "Hellos I am a great persons."
+    component_path = os.path.join(workspace_data.projects[project_handle].components_folder, component_handle)
+    try:
+        file_size = os.path.getsize(component_path)
+        if file_size > SIZE_LIMIT:
+            raise ValueError(f"File {component_path} is too large ({file_size} bytes; limit is {SIZE_LIMIT} bytes).")
+        with open(component_path, "r", encoding="utf-8") as f:
+            component_string = f.read()
+    except Exception as e:
+        print(f"Failed to read component file: {e}", file=sys.stderr)
+        sys.exit(1)    
     messages = make_LLM_messages(action_prompt, component_string)
     try:
         response = client.chat.completions.create(model="gpt-4o",messages=messages)
