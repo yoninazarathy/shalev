@@ -2,9 +2,11 @@ import os
 import sys
 from openai import OpenAI
 from dataclasses import dataclass, field
-# import difflib
+import difflib
 import yaml
 from pprint import pprint
+from yaspin import yaspin
+
 
 SIZE_LIMIT = 30000
 
@@ -47,20 +49,23 @@ def agent_action(workspace_data: ShalevWorkspace, project_handle, action_handle,
         if file_size > SIZE_LIMIT:
             raise ValueError(f"File {component_path} is too large ({file_size} bytes; limit is {SIZE_LIMIT} bytes).")
         with open(component_path, "r", encoding="utf-8") as f:
-            component_string = f.read()
+            component_text = f.read()
     except Exception as e:
         print(f"Failed to read component file: {e}", file=sys.stderr)
         sys.exit(1)    
-    messages = make_LLM_messages(action_prompt, component_string)
+    messages = make_LLM_messages(action_prompt, component_text)
     try:
-        response = client.chat.completions.create(model="gpt-4o",messages=messages)
+        with yaspin(text="Waiting for LLM response...") as spinner:
+            response = client.chat.completions.create(model="gpt-4o",messages=messages)
     except Exception as e:
         print(f"OpenAI API error: {e}")
         sys.exit(1)
-    response_string = response.choices[0].message.content
-    print(response_string)
+    revised_component_text = response.choices[0].message.content
+    # print(f"COMPONENT TEXT:\n{component_text}")
+    # print(f"\nREVISED TEXT:\n{revised_component_text}")
+    compare_strings_succinct(component_text, revised_component_text)
 
-def make_LLM_messages(action_prompt, component_string):
+def make_LLM_messages(action_prompt, component_text):
     messages=[
                 {
                 "role": "system",
@@ -68,55 +73,13 @@ def make_LLM_messages(action_prompt, component_string):
                 },
                 {
                 "role": "user",
-                "content": component_string
+                "content": component_text
                 }
             ]
     return messages
 
-# def compare_strings_succinct(original, corrected):
-#     diff = difflib.unified_diff(original.split(), corrected.split(), lineterm='')
-#     # Join and print the differences
-#     print('\n'.join(diff))
+def compare_strings_succinct(original, corrected):
+    diff = difflib.unified_diff(original.split(), corrected.split(), lineterm='')
+    # Join and print the differences
+    print('\n'.join(diff))
 
-# def grammar_action(component, project_path='example_workspace'):
-#     previous_dir = os.getcwd()
-#     try:
-#         os.chdir(os.path.join(project_path,'components'))
-
-#         if not os.path.exists(component):
-#             raise FileNotFoundError(f"Error: The file '{component}' was not found.")
-
-#         with open(component, 'r') as file:
-#             component_text = file.read()
-
-#         response = client.chat.completions.create(
-#             model="gpt-4o",
-#             messages=[
-#                 {
-#                 "role": "system",
-#                 "content": "You will be provided with text, and your task is to find grammatical errors in that text and make the minimal fix to them. Return the corrected text without any explanations. If there are no errors, return exactly the text you were given."
-#                 },
-#                 {
-#                 "role": "user",
-#                 "content": component_text
-#                 }
-#             ],
-#         )
-#         revised_component_text = response.choices[0].message.content
-
-#         component_out_dir = os.path.join('..','components_out')
-#         if not os.path.exists(component_out_dir):
-#             os.makedirs(component_out_dir)
-#             print(f"Created components_out directory: f{component_out_dir}")
-#         component_out_path = os.path.join(component_out_dir, component+".output")
-#         component_directory = os.path.dirname(component_out_path)
-#         if component_directory:
-#             os.makedirs(component_directory, exist_ok=True)
-#         with open(component_out_path, 'w') as file:
-#             file.write(revised_component_text)
-
-#         # print(f"COMPONENT TEXT:\n{component_text}")
-#         # print(f"\nREVISED TEXT:\n{revised_component_text}")
-#         # compare_strings_succinct(component_text, revised_component_text)
-#     finally:
-#         os.chdir(previous_dir)
