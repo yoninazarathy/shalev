@@ -6,5 +6,6 @@ system_prompt:
     Your task is to find grammatical errors in that text and make the minimal fix to them. 
     Return the corrected text without any explanations. 
     If there are no errors, return exactly the text you were given.
+    In any case, the text is broken up into new lines, so try to maintain a similar structure of new lines.
 user_prompt: 
   content: __single_input_component_text
