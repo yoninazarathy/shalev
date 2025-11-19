@@ -6,7 +6,9 @@ import difflib
 import yaml
 from pprint import pprint
 from yaspin import yaspin
+import structlog
 
+logger = structlog.get_logger()
 
 SIZE_LIMIT = 30000
 
@@ -61,9 +63,22 @@ def agent_action(workspace_data: ShalevWorkspace, project_handle, action_handle,
         print(f"OpenAI API error: {e}")
         sys.exit(1)
     revised_component_text = response.choices[0].message.content
-    # print(f"COMPONENT TEXT:\n{component_text}")
-    # print(f"\nREVISED TEXT:\n{revised_component_text}")
-    compare_strings_succinct(component_text, revised_component_text)
+    overwrite_component(component_path, revised_component_text)
+    # compare_strings_succinct(component_text, revised_component_text)
+    # logger.info("start_job", job_id=689, status="running") #QQQQ still doesn't work
+
+
+def overwrite_component(component_path, revised_component_text):
+    if os.path.isfile(component_path):
+        old_size = os.path.getsize(component_path)
+    else:
+        old_size = 0
+    new_size = len(revised_component_text.encode('utf-8'))
+    with open(component_path, 'w', encoding='utf-8') as f:
+        f.write(revised_component_text)
+    print(f"Wrote new content to {component_path}.")
+    print(f"Previous file size: {old_size} bytes")
+    print(f"New file size: {new_size} bytes ({'increased' if new_size > old_size else 'decreased' if new_size < old_size else 'unchanged'})")
 
 def make_LLM_messages(action_prompt, component_text):
     messages=[

@@ -1,16 +1,24 @@
 import click
 import structlog
+import logging
 from pprint import pprint
 
 #################
 # logging setup #
 #################
+logging.basicConfig(
+    filename="commands_structlog.json",
+    level=logging.INFO,
+    format="%(message)s"
+)
+
 structlog.configure(
     processors=[
+        structlog.processors.TimeStamper(fmt="iso", key="time"),
         structlog.processors.JSONRenderer()
     ]
 )
-log = structlog.get_logger()
+logger = structlog.get_logger()
 # log.info("user_logged_in", user="alice", status="ok") #QQQQ consider if it is what we need
 
 
