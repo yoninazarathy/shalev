@@ -37,7 +37,7 @@ def load_agent_configs_from_folder(folder_path: str) -> List[ActionPrompt]:
     return agent_configs
 
 
-def agent_action(workspace_data: ShalevWorkspace, project_handle, action_handle, component_handle):
+def agent_action_1component(workspace_data: ShalevWorkspace, action_handle, project_handle, component_handle):
     # print(f"{workspace_data.action_prompts_folder=}")
     agent_configs = load_agent_configs_from_folder(workspace_data.action_prompts_folder) #QQQQ do someplace else
     try:

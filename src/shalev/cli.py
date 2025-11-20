@@ -48,11 +48,17 @@ def compose(project):
 ################
 @click.command()
 @click.argument('action')
-@click.argument('project')
-@click.argument('component')
-def agent(action, project, component):
-    agent_action(workspace_data, project, action, component)
-    # agent_action(workspace_data, action_prompt_templates, action, project, component)
+@click.argument('projcomps', nargs=-1)
+def agent(action, projcomps):
+    if len(projcomps) == 0:
+        raise click.UsageError(f"Need at least one project~component pair")
+    for projcomp in projcomps:
+        if projcomp.count('~') != 1:
+            raise click.UsageError(f"'{projcomp}' is missing '~'. Format should be project~component")
+    if len(projcomps) == 1:
+        project, component = projcomps[0].split('~', 1)
+        print(f"{project=}, {component=}")
+        agent_action_1component(workspace_data, action, project, component)
 
 
 #################
