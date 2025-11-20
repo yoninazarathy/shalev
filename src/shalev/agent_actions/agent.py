@@ -37,8 +37,7 @@ def load_agent_configs_from_folder(folder_path: str) -> List[ActionPrompt]:
     return agent_configs
 
 
-def agent_action_1component(workspace_data: ShalevWorkspace, action_handle, project_handle, component_handle):
-    # print(f"{workspace_data.action_prompts_folder=}")
+def agent_action_single_component(workspace_data: ShalevWorkspace, action_handle, project_handle, component_handle):
     agent_configs = load_agent_configs_from_folder(workspace_data.action_prompts_folder) #QQQQ do someplace else
     try:
         action_prompt = agent_configs[action_handle]
@@ -55,7 +54,7 @@ def agent_action_1component(workspace_data: ShalevWorkspace, action_handle, proj
     except Exception as e:
         print(f"Failed to read component file: {e}", file=sys.stderr)
         sys.exit(1)    
-    messages = make_LLM_messages(action_prompt, component_text)
+    messages = make_LLM_messages_single_component(action_prompt, component_text)
     try:
         with yaspin(text="Waiting for LLM response...") as spinner:
             response = client.chat.completions.create(model="gpt-4o",messages=messages)
@@ -67,6 +66,46 @@ def agent_action_1component(workspace_data: ShalevWorkspace, action_handle, proj
     # compare_strings_succinct(component_text, revised_component_text)
     # logger.info("start_job", job_id=689, status="running") #QQQQ still doesn't work
 
+def agent_action_source_and_dest_components(workspace_data: ShalevWorkspace, 
+                                            action_handle, 
+                                            source_project_handle, source_component_handle,
+                                            dest_project_handle, dest_component_handle):
+    # print(f"{source_project_handle=}, {source_component_handle=}, {dest_project_handle=}, {dest_component_handle=}")
+    agent_configs = load_agent_configs_from_folder(workspace_data.action_prompts_folder) #QQQQ do someplace else
+    try:
+        action_prompt = agent_configs[action_handle]
+    except KeyError:
+        print(f"No agent action {action_handle}.", file=sys.stderr)
+        sys.exit(1)
+    source_component_path = os.path.join(workspace_data.projects[source_project_handle].components_folder, source_component_handle)
+    dest_component_path = os.path.join(workspace_data.projects[dest_project_handle].components_folder, dest_component_handle)
+    try:
+        source_file_size = os.path.getsize(source_component_path)
+        if source_file_size > SIZE_LIMIT:
+            raise ValueError(f"File {source_component_path} is too large ({file_size} bytes; limit is {SIZE_LIMIT} bytes).")
+        with open(source_component_path, "r", encoding="utf-8") as f:
+            source_component_text = f.read()
+    except Exception as e:
+        print(f"Failed to read component file: {e}", file=sys.stderr)
+        sys.exit(1)
+    try:
+        dest_file_size = os.path.getsize(dest_component_path)
+        if dest_file_size > SIZE_LIMIT:
+            raise ValueError(f"File {dest_component_path} is too large ({file_size} bytes; limit is {SIZE_LIMIT} bytes).")
+        with open(dest_component_path, "r", encoding="utf-8") as f:
+            dest_component_text = f.read()
+    except Exception as e:
+        print(f"Failed to read component file: {e}", file=sys.stderr)
+        sys.exit(1)        
+    messages = make_LLM_messages_source_and_dest_components(action_prompt, source_component_text, dest_component_text)
+    try:
+        with yaspin(text="Waiting for LLM response...") as spinner:
+            response = client.chat.completions.create(model="gpt-4o",messages=messages)
+    except Exception as e:
+        print(f"OpenAI API error: {e}")
+        sys.exit(1)
+    revised_dest_component_text = response.choices[0].message.content
+    overwrite_component(dest_component_path, revised_dest_component_text)
 
 def overwrite_component(component_path, revised_component_text):
     if os.path.isfile(component_path):
@@ -80,7 +119,7 @@ def overwrite_component(component_path, revised_component_text):
     print(f"Previous file size: {old_size} bytes")
     print(f"New file size: {new_size} bytes ({'increased' if new_size > old_size else 'decreased' if new_size < old_size else 'unchanged'})")
 
-def make_LLM_messages(action_prompt, component_text):
+def make_LLM_messages_single_component(action_prompt, component_text):
     messages=[
                 {
                 "role": "system",
@@ -92,6 +131,20 @@ def make_LLM_messages(action_prompt, component_text):
                 }
             ]
     return messages
+
+def make_LLM_messages_source_and_dest_components(action_prompt, source_component_text, dest_component_text):
+    messages=[
+                {
+                "role": "system",
+                "content": action_prompt.system_prompt["content"],
+                },
+                {
+                "role": "user",
+                "content": "**INPUT**\n"+source_component_text+"\n\n**TARGET**\n"+dest_component_text
+                }
+            ]
+    return messages
+
 
 def compare_strings_succinct(original, corrected):
     diff = difflib.unified_diff(original.split(), corrected.split(), lineterm='')

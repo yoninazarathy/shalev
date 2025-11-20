@@ -50,16 +50,22 @@ def compose(project):
 @click.argument('action')
 @click.argument('projcomps', nargs=-1)
 def agent(action, projcomps):
-    if len(projcomps) == 0:
-        raise click.UsageError(f"Need at least one project~component pair")
     for projcomp in projcomps:
         if projcomp.count('~') != 1:
             raise click.UsageError(f"'{projcomp}' is missing '~'. Format should be project~component")
-    if len(projcomps) == 1:
+    if len(projcomps) == 0:
+        raise click.UsageError(f"Need at least one project~component pair")
+    elif len(projcomps) == 1:
         project, component = projcomps[0].split('~', 1)
-        print(f"{project=}, {component=}")
-        agent_action_1component(workspace_data, action, project, component)
+        agent_action_single_component(workspace_data, action, project, component)
+    elif len(projcomps) == 2:
+        source_project, source_component = projcomps[0].split('~', 1)
+        dest_project, dest_component = projcomps[1].split('~', 1)
+        agent_action_source_and_dest_components(workspace_data, action, source_project, source_component, dest_project, dest_component)
 
+        # print(f"{source_project=}, {source_component=}, {dest_project=}, {dest_component=}")
+    else:
+        raise click.UsageError("Currently supporting only 1 or 2 project~component pairs")
 
 #################
 # shalev config #

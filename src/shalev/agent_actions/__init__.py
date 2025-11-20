@@ -1,3 +1,3 @@
 from .agent import *
 
-__all__ = ['agent_action_1component']
+__all__ = ['agent_action_single_component', 'agent_action_source_and_dest_components']
