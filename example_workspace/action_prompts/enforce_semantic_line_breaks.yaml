@@ -1,0 +1,11 @@
+agent_command_name: slbf
+main_source_label: __single_input_component_text
+system_prompt:
+  content: |
+    You will be provided with text.
+    Your task is to enforce semantic line breaks. 
+    Return the corrected text without any explanations. 
+    If the text already appears to be in semantic line break format, return exactly the text you were given.
+    Do not make other changes to the text, other than enforcing it is in semantic line break format.
+user_prompt: 
+  content: __single_input_component_text
