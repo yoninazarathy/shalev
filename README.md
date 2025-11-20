@@ -1,6 +1,6 @@
 # Shalev (UNDER DEVELOPMENT)
 
-**A framework for systematic book writing with the help of LLM Agents.**
+**A framework for systematic document editing using LLMs.**
 
 ![A mechanical arm](img/shalev_illustration.png)
 
